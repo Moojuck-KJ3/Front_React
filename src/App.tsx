@@ -1,18 +1,15 @@
 import React from 'react';
-import Home from './Pages/Home';
-import { Route, Routes } from 'react-router-dom';
-import Login from './Pages/Login';
-import SignUp from './Pages/SignUp';
+import Header from './Pages/Header';
+import { Outlet } from 'react-router-dom';
 
 console.log('Hello');
 
 const App: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-    </Routes>
+    <>
+      <Header />
+      <Outlet />
+    </>
   );
 };
 
