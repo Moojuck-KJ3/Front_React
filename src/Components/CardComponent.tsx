@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const CardComponent: React.FC = ({ img, playMode, title, detail }) => {
+const CardComponent: React.FC = ({ img, playMode, title, link }) => {
   return (
     <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-      <a href="#">
+      <Link to={`/selecttaste/${link}`}>
         <img src={img} alt="Product" className="h-80 w-72 object-cover rounded-t-xl" />
         <div className="px-4 py-3 w-72">
           <span className="text-gray-400 mr-3 uppercase text-xs">{playMode}</span>
@@ -14,7 +15,7 @@ const CardComponent: React.FC = ({ img, playMode, title, detail }) => {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };

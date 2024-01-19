@@ -22,7 +22,7 @@ const Home: React.FC = () => {
             <p className="mt-1 text-base mb-8 leading-relaxed">
               나도 잘 모르던 나의 취향 저희가 빠르게 분석해드릴게요.
             </p>
-            <div className="flex justify-center mx-auto">
+            <div className="flex justify-center">
               <Link to={'/login'}>
                 <button className=" bg-white hover:bg-gray-100 text-gray-800 font-semibold border rounded py-2 px-4 shadow">
                   시작하기
