@@ -9,6 +9,7 @@ import Login from './Pages/Login.tsx';
 import SignUp from './Pages/SignUp.tsx';
 import Main from './Pages/Main';
 import SelectTaste from './Pages/SelectTaste';
+import Test from './Pages/Test';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/selecttaste/:mode',
         element: <SelectTaste />,
+      },
+      {
+        path: '/test',
+        element: <Test />,
       },
     ],
   },
