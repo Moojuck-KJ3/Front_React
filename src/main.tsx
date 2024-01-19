@@ -10,6 +10,10 @@ import SignUp from './Pages/SignUp.tsx';
 import Main from './Pages/Main';
 import SelectTaste from './Pages/SelectTaste';
 import Test from './Pages/Test';
+import MyFiend from './Pages/ManageFriends/MyFiend';
+import PlaceList from './Pages/PlaceList';
+import SelectPlace from './Pages/SelectPlace';
+import ResultPlace from './Pages/ResultPlace';
 
 const router = createBrowserRouter([
   {
@@ -35,8 +39,24 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: '/selecttaste/:mode',
+        path: '/selecttaste',
         element: <SelectTaste />,
+      },
+      {
+        path: '/myfriend',
+        element: <MyFiend />,
+      },
+      {
+        path: '/placelist',
+        element: <PlaceList />,
+      },
+      {
+        path: '/selectplace',
+        element: <SelectPlace />,
+      },
+      {
+        path: '/resultplace',
+        element: <ResultPlace />,
       },
       {
         path: '/test',

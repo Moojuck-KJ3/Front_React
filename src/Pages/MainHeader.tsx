@@ -22,7 +22,7 @@ const MainHeader: React.FC = () => {
           </li>
           <li>
             <Link to={'/login'}>
-              <button className=" bg-white hover:bg-gray-100 text-gray-800 font-semibold border rounded py-2 px-4 shadow">
+              <button className=" bg-white hover:bg-gray-100 text-gray-800 font-semibold border rounded-xl py-2 px-4 shadow">
                 로그인
               </button>
             </Link>
