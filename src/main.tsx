@@ -7,6 +7,7 @@ import NotFount from './Pages/NotFount.tsx';
 import Home from './Pages/Home.tsx';
 import Login from './Pages/Login.tsx';
 import SignUp from './Pages/SignUp.tsx';
+import Main from './Pages/Main';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />,
+      },
+      {
+        path: '/main',
+        element: <Main />,
       },
     ],
   },

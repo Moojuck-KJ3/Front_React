@@ -18,7 +18,7 @@ const Login: React.FC = () => {
 
   const handleLogin = () => {
     alert(`email : ${email} \n비밀번호 : ${password}`);
-    window.location.href = '/';
+    window.location.href = '/main';
   };
 
   return (

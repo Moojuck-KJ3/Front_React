@@ -1,13 +1,19 @@
 import React from 'react';
-import Header from './Pages/Header';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import MainHeader from './Pages/MainHeader';
+import AuthHeader from './Pages/AuthHeader';
 
 console.log('Hello');
 
 const App: React.FC = () => {
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/';
+  const HeaderComponent = isLoginPage ? MainHeader : AuthHeader;
+
   return (
     <>
-      <Header />
+      <HeaderComponent />
       <Outlet />
     </>
   );

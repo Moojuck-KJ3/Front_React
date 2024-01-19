@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header: React.FC = () => {
+const MainHeader: React.FC = () => {
   return (
     <header className="p-4">
       <div className="p-2 flex justify-between items-center ">
@@ -33,4 +33,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default MainHeader;
