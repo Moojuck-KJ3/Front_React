@@ -2,7 +2,7 @@ import React from 'react';
 
 const PageNumberButton = () => {
   return (
-    <div className="inline-flex rounded-xl mt-6">
+    <div className="inline-flex rounded-xl mt-4">
       <ul className="flex items-center">
         <li className="px-2">
           <button

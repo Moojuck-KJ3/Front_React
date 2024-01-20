@@ -15,7 +15,7 @@ const AuthHeader = () => {
               친구 관리
             </button>
           </Link>
-          <Link to={'/placelist'}>
+          <Link to={'/totallist'}>
             <button className=" bg-white hover:bg-gray-100 text-gray-800 font-semibold border rounded-xl py-2 px-4 shadow">
               수집리스트
             </button>

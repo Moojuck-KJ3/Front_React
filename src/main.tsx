@@ -11,9 +11,10 @@ import Main from './Pages/Main';
 import SelectTaste from './Pages/SelectTaste';
 import Test from './Pages/Test';
 import MyFiend from './Pages/ManageFriends/MyFiend';
-import PlaceList from './Pages/PlaceList';
 import SelectPlace from './Pages/SelectPlace';
 import ResultPlace from './Pages/ResultPlace';
+import TotalList from './Pages/TotalList';
+import WaitFriend from './Pages/WaitFriend';
 
 const router = createBrowserRouter([
   {
@@ -47,16 +48,20 @@ const router = createBrowserRouter([
         element: <MyFiend />,
       },
       {
-        path: '/placelist',
-        element: <PlaceList />,
-      },
-      {
         path: '/selectplace',
         element: <SelectPlace />,
       },
       {
         path: '/resultplace',
         element: <ResultPlace />,
+      },
+      {
+        path: '/totallist',
+        element: <TotalList />,
+      },
+      {
+        path: '/waitfriend',
+        element: <WaitFriend />,
       },
       {
         path: '/test',
