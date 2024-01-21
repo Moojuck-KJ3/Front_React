@@ -1,7 +1,7 @@
 import React from 'react';
-import MapModal from '../Components/MapModal';
-import PageNumberButton from '../Components/PageNumberButton';
-import SearchButton from '../Components/SearchButton';
+import MapModal from '../components/mapModal';
+import PageNumberButton from '../components/pageNumberButton';
+import SearchButton from '../components/searchButton';
 
 const TotalList = () => {
   const [showModal, setShowModal] = React.useState(false);

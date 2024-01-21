@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InteractiveObject from './InterObject_Base';
+import InteractiveObject from './interObject_Base';
 
 interface ClickableSphereProps {
     position: [number, number, number];

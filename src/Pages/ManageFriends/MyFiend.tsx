@@ -1,7 +1,7 @@
 import React from 'react';
-import FriendMenuBar from '../../Components/FriendMenuBar';
-import FollowFriendsList from '../../Components/FollowFriendsList';
-import SearchButton from '../../Components/SearchButton';
+import FriendMenuBar from '../../components/friendMenuBar';
+import FollowFriendsList from '../../components/followFriendsList';
+import SearchButton from '../../components/searchButton';
 
 const MyFiend = () => {
   return (

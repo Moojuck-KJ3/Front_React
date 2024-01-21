@@ -1,5 +1,5 @@
-import Viewer from '../Components/3D_Components/Viewer';
-import { ClickableSphere } from '../Components/3D_Components/TestObject';
+import Viewer from '../components/3D_Components/viewer';
+import { ClickableSphere } from '../components/3D_Components/testObject';
 
 function Test() {
   const spheres = Array.from({ length: 10 }, () => (

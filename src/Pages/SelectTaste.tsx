@@ -1,5 +1,5 @@
 import React from 'react';
-import TastyTag from '../Components/TastyTag';
+import TastyTag from '../components/tastyTag';
 import { Link } from 'react-router-dom';
 
 const SelectTaste: React.FC = () => {

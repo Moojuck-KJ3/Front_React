@@ -1,5 +1,5 @@
 import React from 'react';
-import SocailMediaButton from '../Components/SocailMediaButton';
+import SocailMediaButton from '../components/socailMediaButton';
 import { Link } from 'react-router-dom';
 
 const SignUp: React.FC = () => {

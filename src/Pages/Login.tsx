@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SocailMediaButton from '../Components/SocailMediaButton';
+import SocailMediaButton from '../components/socailMediaButton';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
