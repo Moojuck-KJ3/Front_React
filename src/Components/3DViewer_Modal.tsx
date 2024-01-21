@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { SphereViewer } from '../Components/3DViewer';
-import { Modal } from '../Components/Modal';
+import { SphereViewer } from './3DViewer';
+import { Modal } from './Modal';
 
 interface ModalProps_3D {
   Count: number;

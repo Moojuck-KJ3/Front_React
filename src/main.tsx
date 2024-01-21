@@ -7,14 +7,16 @@ import NotFount from './Pages/NotFount.tsx';
 import Home from './Pages/Home.tsx';
 import Login from './Pages/Login.tsx';
 import SignUp from './Pages/SignUp.tsx';
-import Main from './Pages/Main';
-import SelectTaste from './Pages/SelectTaste';
-import Test from './Pages/Test';
-import MyFiend from './Pages/ManageFriends/MyFiend';
-import SelectPlace from './Pages/SelectPlace';
-import ResultPlace from './Pages/ResultPlace';
-import TotalList from './Pages/TotalList';
-import WaitFriend from './Pages/WaitFriend';
+import Main from './Pages/Main.tsx';
+import SelectTaste from './Pages/SelectTaste.tsx';
+import Test from './Pages/Test.tsx';
+import MyFiend from './Pages/ManageFriends/MyFiend.tsx';
+import SelectPlace from './Pages/SelectPlace.tsx';
+import ResultPlace from './Pages/ResultPlace.tsx';
+import TotalList from './Pages/TotalList.tsx';
+import WaitFriend from './Pages/WaitFriend.tsx';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 const router = createBrowserRouter([
   {
@@ -73,6 +75,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );

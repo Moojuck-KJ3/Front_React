@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Home: React.FC = () => {
   return (
     <>
-      <section className="text-gray-700 body-font bg-gradient-to-l from-transparent to-white mx-10 rounded-md">
+      <section className="text-gray-700 body-font bg-gradient-to-l from-transparent to-white m-10 rounded-md h-screen">
         <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center min-h-full">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="title-font sm:text-6xl hidden md:block text-3xl mb-4 font-medium text-gray-900">
@@ -31,7 +31,11 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className="mt-7 lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img className="scale-150 object-cover object-center rounded" alt="hero" src="./LoginImg.png" />
+            <img
+              className="scale-150 object-cover object-center rounded animate-bounce animate-infinite animate-duration-[5000ms] animate-delay-0 animate-ease-linear animate-normal animate-fill-forwards"
+              alt="hero"
+              src="./LoginImg.png"
+            />
           </div>
         </div>
       </section>

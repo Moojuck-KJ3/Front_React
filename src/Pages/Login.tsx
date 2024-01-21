@@ -23,7 +23,7 @@ const Login: React.FC = () => {
 
   return (
     <div className=" min-h-screen text-gray-900 flex justify-center">
-      <div className="m-20  max-w-screen-xl sm-m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+      <div className="m-20  max-w-screen-xl sm-m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1 animate-fade-up">
         <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
           <div className="mt-5 flex flex-col items-center">
             <h1 className="font-bold text-2xl">로그인</h1>

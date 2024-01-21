@@ -7,7 +7,7 @@ const WaitingFriendModal = () => {
       {/* overlay  */}
       <div className="modal-overlay absolute w-full h-full opacity-50"></div>
 
-      <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+      <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto animate-jump-in">
         {/* Add modal content here */}
         <div className="modal-content py-4 text-left px-6">
           <div className="flex justify-between items-center pb-3">
