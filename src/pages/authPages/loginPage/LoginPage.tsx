@@ -7,6 +7,7 @@ import LoginPageInputs from './LoginPageInputs';
 import LoginPageFooter from './LoginPageFooter';
 import LoginPageHeader from './LoginPageHeader';
 import LoginPageSideImg from './LoginPageSideImg';
+import store from '../../../store/store';
 
 interface LoginPageProps {
   login: (userDetails: { email: string; password: string }, navigate: any) => void;
@@ -57,5 +58,6 @@ const mapActionToProps = (dispatch: any) => {
     ...getActions(dispatch),
   };
 };
+
 
 export default connect(null, mapActionToProps)(LoginPage);

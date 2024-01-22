@@ -21,7 +21,7 @@ const validatePassword = (password: string): boolean => {
   return password.length > 5 && password.length < 12;
 };
 
-const validateMail = (email: string): boolean => {
+export const validateMail = (email: string): boolean => {
   const emailPattern: RegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return emailPattern.test(email);
 };

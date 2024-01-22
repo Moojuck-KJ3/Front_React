@@ -5,15 +5,30 @@ import AuthHeader from './shared/components/headers/AuthHeader';
 
 console.log('Hello');
 
-const App: React.FC = () => {
+interface AppProps {}
+
+const App: React.FC<AppProps> = () => {
   const location = useLocation();
 
-  const isLoginPage = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/';
-  const HeaderComponent = isLoginPage ? MainHeader : AuthHeader;
+  const isLoginPage = ['/login', '/signup', '/'].includes(location.pathname);
+  const isLiveMode = location.pathname === '/livemode';
+
+  let HeaderComponent: React.ReactNode;
+
+  switch (true) {
+    case isLiveMode:
+      HeaderComponent = null;
+      break;
+    case isLoginPage:
+      HeaderComponent = <MainHeader />;
+      break;
+    default:
+      HeaderComponent = <AuthHeader />;
+  }
 
   return (
     <>
-      <HeaderComponent />
+      {HeaderComponent}
       <Outlet />
     </>
   );

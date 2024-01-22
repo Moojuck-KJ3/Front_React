@@ -10,6 +10,7 @@ export const getActions = (dispatch: any) => {
   return {
     login: (userDetails, history) => dispatch(login(userDetails, history)),
     register: (userDetails, history) => dispatch(register(userDetails, history)),
+    setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails)),
   };
 };
 

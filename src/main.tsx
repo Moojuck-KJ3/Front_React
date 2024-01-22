@@ -18,6 +18,7 @@ import WaitFriend from './pages/loadingPages/WaitFriendPage.tsx';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import AlerltNotification from './shared/components/AlerltNotification.tsx';
+import LiveModePage from './pages/liveModePages/liveModePage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: '/selectplace',
         element: <SelectPlace />,
+      },
+      {
+        path: '/livemode',
+        element: <LiveModePage />,
       },
       {
         path: '/resultplace',
