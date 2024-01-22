@@ -1,31 +1,23 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Mesh } from 'three';
-import { useFrame } from '@react-three/fiber';
 
-interface InteractiveObjectProps {
+export interface InteractiveObjectProps {
   position: [number, number, number];
   onClick: () => void;
   children: React.ReactNode;
 }
 
 const InteractiveObject: React.FC<InteractiveObjectProps> = ({ position, onClick, children }) => {
-  const meshRef = useRef<Mesh>(null!);
+  const meshRef = React.useRef<Mesh>(null);
 
-  // 클릭 시 호출될 함수
-  const handleClick = () => {
-    onClick();
-  };
-
-  // 클릭 가능한 객체의 프레임마다 호출되는 함수
-  useFrame(() => {
+  React.useEffect(() => {
     if (meshRef.current) {
-      meshRef.current.rotation.x += 0.01;
-      meshRef.current.rotation.y += 0.01;
+      meshRef.current.userData.onClick = onClick;
     }
-  });
+  }, [onClick]);
 
   return (
-    <mesh ref={meshRef} position={position} onClick={handleClick}>
+    <mesh ref={meshRef} position={position}>
       {children}
     </mesh>
   );

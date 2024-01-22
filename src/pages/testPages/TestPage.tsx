@@ -1,9 +1,11 @@
 import Viewer from '../../3D_components/viewer';
 import { ClickableSphere } from '../../3D_components/testObject';
+import RaycastChecker from '../../3D_components/rayCastChecker';
 
 function Test() {
-  const spheres = Array.from({ length: 10 }, () => (
+  const spheres = Array.from({ length: 10 }, (_, index) => (
     <ClickableSphere
+      key={index}
       position={[
         Math.random() * 10 - 5, // X coordinate
         Math.random() * 10 - 5, // Y coordinate
@@ -15,8 +17,7 @@ function Test() {
   return (
     <div>
       <Viewer width={75} height={60}>
-        {/* <ClickableSphere position={[0, 0, 0]} /> */}
-        {spheres}
+        <RaycastChecker>{spheres}</RaycastChecker>
       </Viewer>
     </div>
   );

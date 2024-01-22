@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import InteractiveObject from './interObject_Base';
 
 interface ClickableSphereProps {
-    position: [number, number, number];
-  }
+  position: [number, number, number];
+}
 
-export const ClickableSphere: React.FC<ClickableSphereProps> = ({position}) => {
+export const ClickableSphere: React.FC<ClickableSphereProps> = ({ position }) => {
   const [isClicked, setClicked] = useState(false);
 
   const handleSphereClick = () => {
-    setClicked((prev)=>(!prev));
+    setClicked((prev) => !prev);
   };
 
   return (
