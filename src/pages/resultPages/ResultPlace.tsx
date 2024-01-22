@@ -1,7 +1,7 @@
 import React from 'react';
-import PlaceResultList from '../components/placeResultList';
-import PageNumberButton from '../components/pageNumberButton';
-import MapModal from '../components/mapModal';
+import PlaceResultList from './PlaceResultList';
+import PageNumberButton from '../../shared/components/buttton/PageNumberButton';
+import MapModal from '../../shared/MapModal';
 
 const ResultPlace: React.FC = () => {
   const [showModal, setShowModal] = React.useState(false);

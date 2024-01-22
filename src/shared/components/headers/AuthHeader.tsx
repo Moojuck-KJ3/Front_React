@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AuthHeader = () => {
+const AuthHeader: React.FC = () => {
   return (
     <header className="p-4">
       <div className="p-2 flex justify-between items-center">

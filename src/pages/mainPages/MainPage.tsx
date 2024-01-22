@@ -1,4 +1,4 @@
-import CardComponent from '../components/cardComponent';
+import CardComponent from '../../shared/components/card/CardComponent';
 function Main() {
   return (
     <section className="w-fit mx-auto grid grid-cols-1 md:grid-cols-3 justify-items-center justify-center gap-y-20 gap-x-14 mt-20 mb-5">

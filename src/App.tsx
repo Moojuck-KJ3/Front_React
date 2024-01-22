@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import MainHeader from './pages/mainHeader';
-import AuthHeader from './pages/authHeader';
+import MainHeader from './shared/components/headers/MainHeader';
+import AuthHeader from './shared/components/headers/AuthHeader';
 
 console.log('Hello');
 

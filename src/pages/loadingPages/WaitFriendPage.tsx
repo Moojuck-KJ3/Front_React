@@ -1,5 +1,5 @@
 import React from 'react';
-import WaitingFriendModal from '../components/waitingFriendModal';
+import WaitingFriendModal from './WaitingFriendModal';
 
 const WaitFriend = () => {
   return (
