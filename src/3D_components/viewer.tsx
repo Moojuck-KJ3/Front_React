@@ -1,6 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import CameraController from './CameraController';
 
 interface ViewerProps {
   width?: number;
@@ -20,9 +21,9 @@ const Viewer: React.FC<ViewerProps> = ({ width, height, children }) => {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       {/* 동적으로 전달된 3D 오브젝트 렌더링 */}
-      {children}
+      <CameraController>{children}</CameraController>
       {/* OrbitControls를 사용하여 카메라 조작 */}
-      <OrbitControls /> {/* enablePan={false} enableZoom={false} enableDamping dampingFactor={0.2} */}
+      <OrbitControls enablePan={false} enableZoom={false} enableDamping dampingFactor={0.2} />
     </Canvas>
   );
 };

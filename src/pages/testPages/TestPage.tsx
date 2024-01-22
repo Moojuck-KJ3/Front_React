@@ -5,16 +5,16 @@ import React from 'react';
 import { Mesh } from 'three';
 
 function Test() {
-  const [sphereRefs, setSphereRefs] = React.useState(() => Array.from({ length: 10 }, () => React.createRef<Mesh>()));
+  const [sphereRefs, setSphereRefs] = React.useState(() => Array.from({ length: 100 }, () => React.createRef<Mesh>()));
 
   const spheres = sphereRefs.map((ref, index) => (
     <ClickableSphere
       key={index}
       meshRef={ref}
       position={[
-        Math.random() * 10 - 5, // X coordinate
-        Math.random() * 10 - 5, // Y coordinate
-        Math.random() * 10 - 5, // Z coordinate
+        Math.random() * 100 - 50, // X coordinate
+        Math.random() * 100 - 50, // Y coordinate
+        Math.random() * 100 - 50, // Z coordinate
       ]}
     />
   ));
