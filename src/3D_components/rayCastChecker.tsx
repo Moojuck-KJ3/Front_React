@@ -40,8 +40,6 @@ const RaycastChecker: React.FC<RaycastProviderProps> = ({ children }) => {
     raycaster.current.setFromCamera(mouse, camera);
     updateArrow();
 
-    console.log("Test");
-
     const intersects = raycaster.current?.intersectObjects(
       children
         .map((child) => child.props.meshRef?.current)
