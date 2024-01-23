@@ -23,7 +23,7 @@ const Viewer: React.FC<ViewerProps> = ({ width, height, children }) => {
       {/* 동적으로 전달된 3D 오브젝트 렌더링 */}
       <CameraController>{children}</CameraController>
       {/* OrbitControls를 사용하여 카메라 조작 */}
-      <OrbitControls enablePan={false} enableZoom={false} enableDamping dampingFactor={0.2} />
+      <OrbitControls /> {/* enablePan={false} enableZoom={false} enableDamping dampingFactor={0.2}*/}
     </Canvas>
   );
 };
