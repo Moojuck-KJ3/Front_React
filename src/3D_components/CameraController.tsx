@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Html } from '@react-three/drei';
@@ -7,12 +7,8 @@ interface CameraControllerProps {
   children: React.ReactNode;
 }
 
-const group = new THREE.Group();
-
 export const CameraController: React.FC<CameraControllerProps> = ({ children }) => {
   const { camera, scene } = useThree();
-  const [positions, setPositions] = useState<THREE.Vector3[]>([]);
-  const [rotations, setRotations] = useState<THREE.Euler[]>([]);
   const [isMoving, setIsMoving] = useState(false);
   const [targetPosition, setTargetPosition] = useState<THREE.Vector3 | null>(null);
   const [cameraPosition, setCameraPosition] = useState<THREE.Vector3>(new THREE.Vector3());
@@ -22,13 +18,15 @@ export const CameraController: React.FC<CameraControllerProps> = ({ children }) 
   const groupRef = useRef<THREE.Group | null>(null);
   const box = new THREE.Box3();
 
-  const handleClick = () => {
+  const group = new THREE.Group();
+  const boxSize = new THREE.Vector3();
+  const boxCenter = new THREE.Vector3();
+  const nextCameraPos = new THREE.Vector3();
+
+  const handleClick = useCallback(() => {
     // 다음 단계로 이동
-    console.log('click');
     setStage((prevStage) => {
       const nextStage = prevStage + 1;
-
-      console.log(groupRef.current?.children[0].children.length);
 
       // children의 개수를 넘어가면 stage를 0으로 설정
       if (groupRef.current && nextStage * 10 >= groupRef.current.children[0].children.length) {
@@ -38,7 +36,7 @@ export const CameraController: React.FC<CameraControllerProps> = ({ children }) 
       setIsMoving(true); // 카메라 이동 시작
       return nextStage;
     });
-  };
+  }, [groupRef, stage]);
 
   useEffect(() => {
     if (groupRef.current) {
@@ -59,20 +57,28 @@ export const CameraController: React.FC<CameraControllerProps> = ({ children }) 
         group.add(clone);
       });
 
+      // 그룹에 추가되지 않은 '구체'들의 색상을 파란색으로 변경
+      groupRef.current.children[0].children.forEach((child) => {
+        if (!selectedChildren.includes(child) && child instanceof THREE.Mesh) {
+          child.material = new THREE.MeshBasicMaterial({ color: 'blue' }); // 파란색 재질 설정
+        }
+      });
+
       // 그룹을 씬에 추가
       scene.add(group);
 
       // 그룹을 기반으로 박스를 계산
       box.setFromObject(group);
-      const boxCenter = box.getCenter(new THREE.Vector3());
-      const nextCameraPos = new THREE.Vector3(
-        boxCenter.x,
-        boxCenter.y,
-        boxCenter.z + box.getSize(new THREE.Vector3()).length(),
-      );
+      box.getSize(boxSize);
+      box.getCenter(boxCenter);
+      nextCameraPos.set(boxCenter.x, boxCenter.y, boxCenter.z + boxSize.length());
+
       setTargetPosition(nextCameraPos); // targetPosition 업데이트
-      setPositions((prevPositions) => [...prevPositions, camera.position.clone()]);
-      setRotations((prevRotations) => [...prevRotations, camera.rotation.clone()]);
+
+      // 카메라의 초기 위치 설정
+      if (stage === 0 && !isMoving) {
+        camera.position.copy(nextCameraPos);
+      }
     }
   }, [children, camera, stage]);
 
