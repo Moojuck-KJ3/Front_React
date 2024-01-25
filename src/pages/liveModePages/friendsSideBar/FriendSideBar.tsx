@@ -19,7 +19,7 @@ const FriendSideBar: React.FC = () => {
   return (
     <MainContainer>
       <AddFriendButton />
-      <FriendsTitle title="개인 메세지" />
+      <FriendsTitle title="친구 리스트" />
       <FriendList />
       <FriendsTitle title="초대장" />
       <PendingInvitaionList />

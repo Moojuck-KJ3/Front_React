@@ -11,14 +11,14 @@ const App: React.FC<AppProps> = () => {
   const location = useLocation();
 
   const isLoginPage = ['/login', '/signup', '/'].includes(location.pathname);
-  const isLiveMode = location.pathname === '/livemode';
+  // const isLiveMode = location.pathname === '/livemode';
 
   let HeaderComponent: React.ReactNode;
 
   switch (true) {
-    case isLiveMode:
-      HeaderComponent = null;
-      break;
+    // case isLiveMode:
+    //   HeaderComponent = null;
+    //   break;
     case isLoginPage:
       HeaderComponent = <MainHeader />;
       break;

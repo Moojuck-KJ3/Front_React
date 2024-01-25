@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
-import { AddFriendDialog } from './AddFriendDialog';
+import AddFriendDialog from './AddFriendDialog';
 
 const AddFriendButton: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

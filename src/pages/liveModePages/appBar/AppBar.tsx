@@ -1,14 +1,14 @@
 import React from 'react';
-import { styled } from '@mui/material';
+import { styled } from '@mui/system';
+import DropdownMenu from './AudioOnlyButton';
+import ChosenOptionLabel from './ChosenOptionLabel';
 
 const MainContainer = styled('div')({
   position: 'absolute',
   right: '0',
   top: '0',
   height: '48px',
-  borderBottom: '1px solid black',
-  backgroundColor: '#40BFFF',
-  width: 'calc(100% - 296px)',
+  width: 'calc(100% - 326px)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -16,7 +16,12 @@ const MainContainer = styled('div')({
 });
 
 const AppBar = () => {
-  return <MainContainer></MainContainer>;
+  return (
+    <MainContainer>
+      <ChosenOptionLabel />
+      <DropdownMenu />
+    </MainContainer>
+  );
 };
 
 export default AppBar;

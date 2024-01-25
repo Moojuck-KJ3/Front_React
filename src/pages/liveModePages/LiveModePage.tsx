@@ -1,38 +1,40 @@
 import React, { useEffect } from 'react';
-import { styled } from '@mui/material';
-import SideBar from './sideBar/SideBar';
-import FriendSideBar from './friendsSideBar/FriendSideBar';
-import Messenger from './messenger/Messenger';
-import AppBar from './appBar/AppBar';
 import { logout } from '../../shared/utils/auth';
 import { connect } from 'react-redux';
 import { getActions } from '../../store/actions/authActions';
+import { connectWithSocketServer } from '../../realtimeCommunication/socketConnection';
+import FriendSideBar from './friendsSideBar/FriendSideBar';
+import Room from './room/Room';
+import ActiveRoomList from './ActiveRoomList';
+import { styled } from '@mui/system';
 
-const Wrapper = styled('div')({
-  width: '100%',
-  height: '100vh',
-  display: 'flex',
-});
-
-const LiveModePage: React.FC = ({ setUserDetails }) => {
+const LiveModePage: React.FC = ({ setUserDetails, isUserInRoom }) => {
   useEffect(() => {
     const userDetails = localStorage.getItem('user');
-    console.log(userDetails);
 
     if (!userDetails) {
       logout();
     } else {
       setUserDetails(JSON.parse(userDetails));
+      connectWithSocketServer(JSON.parse(userDetails));
     }
   }, []);
+
   return (
-    <Wrapper>
-      <SideBar />
+    <div className="w-full h-full">
       <FriendSideBar />
-      <Messenger />
-      <AppBar />
-    </Wrapper>
+      <div className="w-full px-20 justify-items-center justify-center gap-y-20 gap-x-14 mt-20 mb-5">
+        <ActiveRoomList />
+        {isUserInRoom && <Room />}
+      </div>
+    </div>
   );
+};
+
+const mapStoreStateToProps = ({ room }) => {
+  return {
+    ...room,
+  };
 };
 
 const mapActionToProps = (dispatch) => {
@@ -41,4 +43,4 @@ const mapActionToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapActionToProps)(LiveModePage);
+export default connect(mapStoreStateToProps, mapActionToProps)(LiveModePage);

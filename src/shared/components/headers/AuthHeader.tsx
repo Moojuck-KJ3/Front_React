@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../../utils/auth';
 
 const AuthHeader: React.FC = () => {
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <header className="p-4">
       <div className="p-2 flex justify-between items-center">
@@ -28,7 +32,10 @@ const AuthHeader: React.FC = () => {
           <div></div>
           <h1 className="font-semibold">안녕하세요, 마찬옥님</h1>
           <Link to={'/'}>
-            <button className=" bg-white hover:bg-gray-100 text-gray-800 font-semibold border rounded-xl py-2 px-4 shadow">
+            <button
+              onClick={handleLogout}
+              className=" bg-white hover:bg-gray-100 text-gray-800 font-semibold border rounded-xl py-2 px-4 shadow"
+            >
               로그아웃
             </button>
           </Link>

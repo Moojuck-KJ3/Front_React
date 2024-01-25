@@ -1,16 +1,11 @@
-import alertActions from '../actions/alertAction';
+import alertActions from '../actions/alertActions';
 
-interface AlertState {
-  showAlertMessage: boolean;
-  alertMessageContent: string | null;
-}
-
-const initState: AlertState = {
+const initState = {
   showAlertMessage: false,
   alertMessageContent: null,
 };
 
-const reducer = (state: AlertState = initState, action) => {
+const reducer = (state = initState, action) => {
   switch (action.type) {
     case alertActions.OPEN_ALERT_MESSAGE:
       return {
@@ -24,7 +19,6 @@ const reducer = (state: AlertState = initState, action) => {
         showAlertMessage: false,
         alertMessageContent: null,
       };
-
     default:
       return state;
   }
