@@ -6,16 +6,25 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
 import InputWithLabel from '../../../shared/components/InputWithLabel';
+import { getActions } from '../../../store/actions/friendsActions';
+import { connect } from 'react-redux';
 
-export const AddFriendDialog = ({ isDialogOpen, closeDialogHander, sendFriendInvitation = () => {} }) => {
+const AddFriendDialog: React.FC = ({ isDialogOpen, closeDialogHander, sendFriendInvitation = () => {} }) => {
   const [email, setEmail] = useState('');
   const [isFormValid, setIsFormValid] = useState('');
 
-  const handleSendInvitation = () => {};
+  const handleSendInvitation = () => {
+    sendFriendInvitation(
+      {
+        targetEmailAddress: email,
+      },
+      closeDialogHander,
+    );
+  };
 
   const handleCloseDialog = () => {
     closeDialogHander();
-    setEmain('');
+    setEmail('');
   };
 
   useEffect(() => {
@@ -61,3 +70,11 @@ export const AddFriendDialog = ({ isDialogOpen, closeDialogHander, sendFriendInv
     </div>
   );
 };
+
+const mapActionToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(null, mapActionToProps)(AddFriendDialog);

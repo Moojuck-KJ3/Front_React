@@ -19,6 +19,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import AlerltNotification from './shared/components/AlerltNotification.tsx';
 import LiveModePage from './pages/liveModePages/liveModePage.tsx';
+import Room from './pages/liveModePages/room/Room.tsx';
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: '/livemode',
         element: <LiveModePage />,
+      },
+      {
+        path: '/livemode/:roomnumber',
+        element: <Room />,
       },
       {
         path: '/resultplace',

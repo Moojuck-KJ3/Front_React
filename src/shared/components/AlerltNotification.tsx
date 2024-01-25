@@ -2,7 +2,7 @@ import React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { connect } from 'react-redux';
-import { getActions } from '../../store/actions/alertAction';
+import { getActions } from '../../store/actions/alertActions';
 
 const AlerltNotification = ({ showAlertMessage, closeAlertMessage, alertMessageContent }) => {
   return (

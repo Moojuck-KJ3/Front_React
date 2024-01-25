@@ -10,6 +10,21 @@
     "preview": "vite preview",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
@@ -21,19 +36,21 @@
     "@mui/icons-material": "^5.15.5",
     "@mui/material": "^5.15.5",
     "@react-three/drei": "^9.96.0",
-    "@reduxjs/toolkit": "^2.0.1",
+    "@reduxjs/toolkit": "^1.6.2",
     "autoprefixer": "^10.4.17",
     "axios": "^1.6.5",
+    "peerjs": "^1.5.2",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
-    "react-redux": "^9.0.0",
-    "react-router-dom": "^6.21.2",
+    "react-redux": "^7.2.5",
+    "react-router": "^6.21.3",
+    "react-router-dom": "^6.21.3",
     "react-three-fiber": "^6.0.13",
-    "redux": "^4.0.0",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.1.0",
+    "redux-thunk": "^2.3.0",
+    "simple-peer": "^9.11.0",
+    "socket.io-client": "^4.4.1",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animated": "^1.0.1",
     "three": "^0.160.0",
@@ -42,6 +59,7 @@
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
+    "@types/simple-peer": "^9.11.8",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "@vitejs/plugin-react": "^4.2.1",
@@ -50,8 +68,13 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "events": "^3.3.0",
+    "global": "^4.4.0",
     "prettier": "^3.2.4",
+    "process": "^0.11.10",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-compatible-readable-stream": "^3.6.1",
+    "vite-plugin-node-polyfills": "^0.19.0"
   }
 }
