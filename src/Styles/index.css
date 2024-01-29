@@ -12,3 +12,21 @@ body {
   background: linear-gradient(180deg, var(--gradient-color-1) 0%, var(--gradient-color-2) 0.01%, var(--gradient-color-3) 100%);
   min-height: 100vh;
 }
+
+@keyframes animate-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(20px); /* You can adjust the translation amount */
+  }
+}
+
+@keyframes animate-y {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px); /* You can adjust the translation amount */
+  }
+}

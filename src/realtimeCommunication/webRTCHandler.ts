@@ -1,6 +1,5 @@
 import store from '../store/store';
 import { setLocalStream, setRemoteStreams } from '../store/actions/roomActions';
-import Peer from 'simple-peer';
 import * as socketConnection from './socketConnection';
 
 const getConfiguration = () => {
@@ -44,6 +43,7 @@ export const getLocalStreamPreview = (onlyAudio = false, callbackFunc) => {
       console.log('Cannot get an access to local stream');
     });
 };
+
 let peers = {};
 
 export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {

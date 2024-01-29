@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/pages/liveModePages/sideBar/ActiveRoomButton.tsx", "src/realtimeCommunication/webRTCHandler.ts", "src/realtimeCommunication/peer.js"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/pages/mainPages/room/rommButtons/ActiveRoomButton.tsx", "src/realtimeCommunication/webRTCHandler.ts", "src/realtimeCommunication/peer.js", "src/pages/mainPages/room/video/button"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

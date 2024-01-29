@@ -10,6 +10,7 @@ import {
 } from '../store/actions/roomActions';
 import * as socketConnection from './socketConnection';
 import * as webRTCHandler from './webRTCHandler';
+import { useNavigate } from 'react-router';
 
 export const createNewRoom = () => {
   const successCalbackFunc = () => {

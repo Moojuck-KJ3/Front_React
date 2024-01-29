@@ -1,21 +1,36 @@
-import CardComponent from '../../shared/components/card/CardComponent';
-function MainPage() {
-  return (
-    <section className="w-fit mx-auto grid grid-cols-1 md:grid-cols-3 justify-items-center justify-center gap-y-20 gap-x-14 mt-20 mb-5">
-      <CardComponent img={singlePlayImg} title={'혼자이신가요?'} playMode={'싱글플레이'} link={'/selecttaste'} />
-      <CardComponent img={duoPlayImg} title={'친구와 함께이신가요?'} playMode={'듀오플레이'} link={'/selecttaste'} />
-      <CardComponent
-        img={livePlayImg}
-        title={'실시간으로 친구와 분석받고 싶다면? '}
-        playMode={'실시간 플레이'}
-        link={'/livemode'}
-      />
-    </section>
-  );
-}
+import React, { useEffect } from 'react';
+import { logout } from '../../shared/utils/auth';
+import { connect } from 'react-redux';
+import { getActions } from '../../store/actions/authActions';
+import { connectWithSocketServer } from '../../realtimeCommunication/socketConnection';
+import Room from './room/room/Room';
+import Entry from './entry/Entry';
 
-const singlePlayImg = './SinglePlayCardImg.png';
-const duoPlayImg = './DuoPlayCardImg.png';
-const livePlayImg = './LivePlayCardImg.png';
+const MainPage: React.FC = ({ setUserDetails, isUserInRoom }) => {
+  useEffect(() => {
+    const userDetails = localStorage.getItem('user');
 
-export default MainPage;
+    if (!userDetails) {
+      logout();
+    } else {
+      setUserDetails(JSON.parse(userDetails));
+      connectWithSocketServer(JSON.parse(userDetails));
+    }
+  }, []);
+
+  return <div className="container mx-auto py-10">{isUserInRoom ? <Room /> : <Entry />}</div>;
+};
+
+const mapStoreStateToProps = ({ room }) => {
+  return {
+    ...room,
+  };
+};
+
+const mapActionToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(mapStoreStateToProps, mapActionToProps)(MainPage);
