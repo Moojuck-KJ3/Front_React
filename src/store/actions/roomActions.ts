@@ -1,3 +1,6 @@
+import { openAlertMessage } from './alertActions';
+import * as api from '../../api';
+
 export const roomActions = {
   OPEN_ROOM: 'ROOM.OPEN_ROOM',
   SET_ROOM_DETAILS: 'ROOM.SET_ROOM_DETAILS',
@@ -7,6 +10,7 @@ export const roomActions = {
   SET_AUDIO_ONLY: 'ROOM.SET_AUDIO_ONLY',
   SET_SCREEN_SHARE_STREAM: 'ROOM.SET_SCREEN_SHARE_STREAM',
   SET_IS_USER_JOINED_WITH_ONLY_AUDIO: 'ROOM.SET_IS_USER_JOINED_WITH_ONLY_AUDIO',
+  SET_LOCATION: 'ROOM.SET_LOCATION',
 };
 
 export const setOpenRoom = (isUserRoomCreator = false, isUserInRoom = false) => {
@@ -23,6 +27,26 @@ export const getActions = (dispatch) => {
     setScreenSharingStream: (stream) => {
       dispatch(setScreenSharingStream(stream));
     },
+    setLocation: (requestData) => dispatch(setLocation(requestData)),
+  };
+};
+
+export const setLocation = (requestData) => {
+  return async (dispatch) => {
+    const response = await api.roomGetAddress(requestData);
+
+    if (response.error) {
+      dispatch(openAlertMessage(response.exception?.response?.data));
+    } else {
+      dispatch(setRoomLocation(response.data.location));
+    }
+  };
+};
+
+export const setRoomLocation = (location) => {
+  return {
+    type: roomActions.SET_LOCATION,
+    location,
   };
 };
 
