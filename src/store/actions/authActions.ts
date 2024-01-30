@@ -1,3 +1,4 @@
+import { defineConfig } from 'vite';
 import * as api from '../../api';
 import { openAlertMessage } from './alertActions';
 
@@ -27,10 +28,22 @@ const login = (userDetails, navigate) => {
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      const { userDetails } = response?.data;
-      localStorage.setItem('user', JSON.stringify(userDetails));
+      // const { userDetails } = response?.data;
+      // localStorage.setItem('user', JSON.stringify(userDetails));
 
-      dispatch(setUserDetails(userDetails));
+      //dispatch(setUserDetails(userDetails));
+      const accessToken = response?.data?.accessToken;
+      const userName = response?.data?.userName;
+      
+      //console.log(accessToken);
+      localStorage.setItem('userToken', accessToken);
+
+      const userDetail = {
+        name : userName,
+        email : userDetails.email,
+      }
+
+      dispatch(setUserDetails(userDetail));
       navigate('/main');
     }
   };
@@ -39,14 +52,25 @@ const login = (userDetails, navigate) => {
 const register = (userDetails, navigate) => {
   return async (dispatch) => {
     const response = await api.register(userDetails);
-    console.log(response);
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      const { userDetails } = response?.data;
-      localStorage.setItem('user', JSON.stringify(userDetails));
+      // const { userDetails } = response?.data;
+      // localStorage.setItem('user', JSON.stringify(userDetails));
 
-      dispatch(setUserDetails(userDetails));
+      // console.log(response);
+      // console.log(response?.data);
+      const accessToken = response?.data?.accessToken;
+      
+      //console.log(accessToken);
+      localStorage.setItem('userToken', accessToken);
+
+      const userDetail = {
+        name : userDetails.name,
+        email : userDetails.email,
+      }
+
+      dispatch(setUserDetails(userDetail));
       navigate('/main');
     }
   };

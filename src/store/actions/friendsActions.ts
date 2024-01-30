@@ -12,6 +12,7 @@ export const getActions = (dispatch) => {
     sendFriendInvitation: (data, closeDialogHandler) => dispatch(sendFriendInvitation(data, closeDialogHandler)),
     acceptFriendInvitation: (data) => dispatch(acceptFriendInvitation(data)),
     rejectFriendInvitation: (data) => dispatch(rejectFriendInvitation(data)),
+    getFriends: () => dispatch(getFriends()),
   };
 };
 
@@ -26,6 +27,18 @@ export const setFriends = (friends) => {
   return {
     type: friendsActions.SET_FRIENDS,
     friends,
+  };
+};
+
+export const getFriends = () => {
+  return async (dispatch) => {
+    const response = await api.getMainData();
+
+    if (response.error) {
+      dispatch(openAlertMessage(response.exception?.response?.data));
+    } else {
+      dispatch(setFriends(response.data.friends)); // 에러 없이 친구 정보를 잘 가져왔다면 친구 정보 설정 액션 디스패치
+    }
   };
 };
 
