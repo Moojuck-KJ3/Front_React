@@ -12,6 +12,8 @@ import ModeOne from '../../mode/modeOne/ModeOne';
 import ModeTwo from '../../mode/modeTwo/ModeTwo';
 import ModeThree from '../../mode/modeThree/ModeThree';
 import ModeFour from '../../mode/modeFour/ModeFour';
+import { getActions } from '../../../../store/actions/roomActions';
+import { connect } from 'react-redux';
 
 const MODE = {
   MODE0: 'MODE.MODE_NUMBER_ZERO',
@@ -21,7 +23,17 @@ const MODE = {
   MODE4: 'MODE.MODE_NUMBER_FOUR',
 };
 
-const Room: React.FC = () => {
+// 인자로 전달된 action들
+interface RoomProps {
+  setMoodKeyWard: (roomId: string, user1 : object, user2 : object) => void;
+  getTagsByAudio: (user1 : object, user2 : object) => void;
+  getKeywords2Rests: (user1_id : string, user2_id : string) => void;
+  getNewCombine: (roomId : string, new_combi : object) => void;
+  getRestCallPass : (user1_id : string, user2_id : string) => void;
+  getResultRests : (user1_id : string, user2_id : string) => void;
+}
+
+const Room: React.FC<RoomProps> = ({}) => {
   const [isSelectDone, setIsSelectDone] = useState(false);
   const [mode, setMode] = useState(MODE.MODE0);
   const [shouldAnimate, setShouldAnimate] = useState(false);
@@ -144,4 +156,15 @@ const Room: React.FC = () => {
   }
 };
 
-export default Room;
+//export default Room;
+
+const mapActionToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+
+const ConnectedRoom = connect(null, mapActionToProps)(Room);
+
+export default ConnectedRoom;

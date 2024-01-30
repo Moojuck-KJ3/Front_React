@@ -11,7 +11,14 @@ const initState = {
   screenSharingStream: null,
   isScreenSharingActive: false,
   isUserJoinedWithOnlyAudio: false,
-  location: null,
+  roomId: null,
+  user1: null,
+  user2: null,
+  rest1: null, // rest 들은 api 요청에 따라 내용이 달라질 수 있으므로 주의할 것
+  rest2: null, // rest1,2 는 결과창에 사용된다
+  rest3: null,
+  rest4: null, // rest4,5 는 특정한 요청에만 값이 포함되어 오니 주의할 것
+  rest5: null,
 };
 
 const reducer = (state = initState, action) => {
@@ -58,11 +65,41 @@ const reducer = (state = initState, action) => {
         ...state,
         isUserJoinedWithOnlyAudio: action.isUserJoinedWithOnlyAudio,
       };
-    case roomActions.SET_LOCATION:
+    case roomActions.SET_MOOD_KEYWARD:
       return {
         ...state,
-        location: action.location,
+        roomId: action.roomId,
+        user1: action.user1,
+        user2: action.user2,
       };
+    case roomActions.SET_TAGS_BY_AUDIO:
+      return {
+        ...state,
+        user1: action.user1,
+        user2: action.user2,
+      };
+    case roomActions.SET_KEYWORDS_2_RESTS:
+        return {
+          ...state,
+          rest1 : action.rest1,
+          rest2 : action.rest2,
+          rest3 : action.rest3,
+        };
+    case roomActions.SET_ALL_RESTS:
+        return {
+          ...state,
+          rest1 : action.rest1,
+          rest2 : action.rest2,
+          rest3 : action.rest3,
+          rest4 : action.rest4,
+          rest5 : action.rest5,
+        };
+    case roomActions.SET_RESULT_REST:
+        return {
+          ...state,
+          rest1 : action.rest1,
+          rest2 : action.rest2,
+        };
     default:
       return state;
   }

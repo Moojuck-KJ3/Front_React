@@ -2,9 +2,9 @@ import axios from 'axios';
 import { logout } from './shared/utils/auth';
 
 const apiClient = axios.create({
-  //baseURL: 'https://backend-nest.fly.dev/api', // main url
-  baseURL: 'https://backend-nest.fly.dev/cats', // test url
-  timeout: 1000,
+  baseURL: 'https://backend-nest.fly.dev/api', // main url
+  //baseURL: 'https://backend-nest.fly.dev/cats', // test url
+  timeout: 3000,
 });
 
 apiClient.interceptors.request.use(
@@ -96,7 +96,7 @@ export const getMainData = async () => {
 };
 
 // Room API
-export const roomGetAddress = async (data) => {
+export const roomSetAddress = async (data) => {
   try {
     return await apiClient.post('/rooms/get-address', data);
   } catch (exception) {
@@ -120,9 +120,6 @@ export const roomGetFoodCategory = async (data) => {
   }
 };
 
-// 보내주는 Data 방식이 2개이므로 Data Props를 잘 참고하여 보내기
-// 1. 단순 태그 보내기
-// 2. 최종 태그 선택 후 보내기
 export const roomGetMoodKeyword = async (data) => {
   try {
     return await apiClient.post('/rooms/get-moodKeyword', data);
@@ -138,6 +135,18 @@ export const roomGetMoodKeyword = async (data) => {
 export const roomSendTagByAudio = async (data) => {
   try {
     return await apiClient.post('/rooms/get-tags-by-audio', data);
+  } catch (exception) {
+    checkResponseCode(exception);
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
+
+export const roomSelectMoodKeyword = async (data) => {
+  try {
+    return await apiClient.post('/rooms/select-moodKeyword', data);
   } catch (exception) {
     checkResponseCode(exception);
     return {

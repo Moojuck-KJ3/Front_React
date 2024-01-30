@@ -1,3 +1,4 @@
+import { defineConfig } from 'vite';
 import * as api from '../../api';
 import { openAlertMessage } from './alertActions';
 
@@ -39,12 +40,18 @@ const login = (userDetails, navigate) => {
 const register = (userDetails, navigate) => {
   return async (dispatch) => {
     const response = await api.register(userDetails);
-    console.log(response);
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      const { userDetails } = response?.data;
-      localStorage.setItem('user', JSON.stringify(userDetails));
+      // const { userDetails } = response?.data;
+      // localStorage.setItem('user', JSON.stringify(userDetails));
+
+      console.log(response);
+      console.log(response?.data);
+      const accessToken = response?.data?.accessToken;
+      
+      console.log(accessToken);
+      localStorage.setItem('user', accessToken);
 
       dispatch(setUserDetails(userDetails));
       navigate('/main');

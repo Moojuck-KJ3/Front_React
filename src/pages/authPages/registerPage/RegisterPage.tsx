@@ -9,7 +9,7 @@ import RegisterPageFooter from './RegisterPageFooter';
 import RegisterPageSideImg from './RegisterPageSideImg';
 
 interface RegisterPageProps {
-  register: (userDetails: { username: string; email: string; password: string }, navigate: any) => void;
+  register: (userDetails: { email: string; username: string; password: string }, navigate: any) => void;
 }
 
 const RegisterPage: React.FC<RegisterPageProps> = ({ register }) => {
@@ -21,15 +21,15 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ register }) => {
 
   const handleRegister = () => {
     const userDetails = {
-      username,
       email,
+      username,
       password,
     };
     register(userDetails, navigate);
   };
 
   useEffect(() => {
-    setIsFormVaild(validateRegisterForm({ username, email, password }));
+    setIsFormVaild(validateRegisterForm({ email, username, password }));
   }, [username, email, password, setIsFormVaild]);
 
   return (
