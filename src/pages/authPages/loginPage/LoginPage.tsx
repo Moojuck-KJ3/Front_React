@@ -19,13 +19,13 @@ const LoginPage: React.FC<LoginPageProps> = ({ login }) => {
   const [password, setPassword] = useState('');
   const [isFormVaild, setIsFormVaild] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = async() => {
     const userDetails = {
       email,
       password,
     };
 
-    login(userDetails, navigate);
+    await login(userDetails, navigate);
   };
 
   useEffect(() => {
