@@ -9,10 +9,11 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    const userDetails = localStorage.getItem('user');
+    const userDetails = localStorage.getItem('userToken');
 
     if (userDetails) {
-      const token = JSON.parse(userDetails).token;
+      //const token = JSON.parse(userDetails).token;
+      const token = userDetails;
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -25,7 +26,7 @@ apiClient.interceptors.request.use(
 // public routes
 export const login = async (data) => {
   try {
-    return await apiClient.get('/users/login', data);
+    return await apiClient.post('/users/login', data);
   } catch (exception) {
     return {
       error: true,
@@ -72,7 +73,7 @@ export const acceptFriendInvitation = async (data) => {
 
 export const rejectFriendInvitation = async (data) => {
   try {
-    return await apiClient.post('/friends/requests/decline', data);
+    return await apiClient.post('/friends/requests/reject', data);
   } catch (exception) {
     checkResponseCode(exception);
     return {

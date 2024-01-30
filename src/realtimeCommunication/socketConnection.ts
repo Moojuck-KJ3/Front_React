@@ -8,9 +8,10 @@ import * as webRTCHandler from './webRTCHandler';
 let socket = null;
 
 export const connectWithSocketServer = (userDetails) => {
-  const jwtToken = userDetails.token;
+  //const jwtToken = userDetails.token;
+  const jwtToken = userDetails;
 
-  socket = io('http://localhost:3000', {
+  socket = io('https://backend-nest.fly.dev/api', { //'http://localhost:3000'
     auth: {
       token: jwtToken,
     },

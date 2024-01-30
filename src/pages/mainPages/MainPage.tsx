@@ -9,16 +9,18 @@ import Entry from './entry/Entry';
 
 const MainPage: React.FC = ({ setUserDetails, isUserInRoom }) => {
   useEffect(() => {
-    const userDetails = localStorage.getItem('user');
+    const userDetails = localStorage.getItem('userToken');
 
     if (!userDetails) {
       logout();
     } else {
-      setUserDetails(JSON.parse(userDetails));
-      connectWithSocketServer(JSON.parse(userDetails));
+      // setUserDetails(JSON.parse(userDetails));
+      // connectWithSocketServer(JSON.parse(userDetails));
+      setUserDetails(userDetails);
+      connectWithSocketServer(userDetails);
       getFriends();
     }
-  }, []);
+  });
 
   return <div className="container mx-auto py-10">{isUserInRoom ? <Room /> : <Entry />}</div>;
 };
