@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import MicIcon from '@mui/icons-material/Mic';
+import KaKaoTalkSearchModal from './KaKaoTalkSearchModal';
 
 const MODAL_MODE = {
   MODE0: 'MODE.MODE_NUMBER_ZERO',
   MODE1: 'MODE.MODE_NUMBER_ONE',
+  MODE2: 'MODE.MODE_NUMBER_TWO',
 };
 
-const ModeOneExpainingModal: React.FC = ({ mode, onClose }) => {
+const ModeZeroExpainingModal: React.FC = ({ mode, onClose }) => {
   const [modalmode, setmodalMode] = useState(MODAL_MODE.MODE0);
 
   const handleSelectionDone = () => {
@@ -19,12 +21,19 @@ const ModeOneExpainingModal: React.FC = ({ mode, onClose }) => {
 
     if (modalmode === MODAL_MODE.MODE1) {
       console.log('mode1 changed to mode2');
+      setmodalMode(MODAL_MODE.MODE2);
+    }
+    if (modalmode === MODAL_MODE.MODE2) {
+      console.log('mode2 changed to mode3');
       onClose();
     }
   };
 
   switch (modalmode) {
     case MODAL_MODE.MODE0:
+      return <KaKaoTalkSearchModal handleSelectionDone={handleSelectionDone} />;
+
+    case MODAL_MODE.MODE1:
       return (
         <div>
           <div className="modal fixed w-full h-full -top-10 left-0 flex items-center justify-center">
@@ -58,7 +67,7 @@ const ModeOneExpainingModal: React.FC = ({ mode, onClose }) => {
         </div>
       );
 
-    case MODAL_MODE.MODE1:
+    case MODAL_MODE.MODE2:
       return (
         <div>
           <div className="modal fixed w-full h-full -top-10 left-0 flex items-center justify-center">
@@ -91,4 +100,4 @@ const ModeOneExpainingModal: React.FC = ({ mode, onClose }) => {
   }
 };
 
-export default ModeOneExpainingModal;
+export default ModeZeroExpainingModal;

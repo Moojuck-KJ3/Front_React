@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
-import AddedTag from '../../../tag/placeTag/AddedPlaceTag';
+import AddedTag from '../../modeOne/placeTag/AddedPlaceTag';
 import Button from '../../../../../shared/components/buttton/Button';
 
 interface SideBarProps {
   onOpenModal: (value: boolean) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ onOpenModal }) => {
+const ModeZeroSideBar: React.FC<SideBarProps> = ({ onOpenModal, selectedFoodTags }) => {
+  console.log(selectedFoodTags);
+
   return (
     <div className="fixed flex flex-col h-full right-0 w-[180px] bg-white p-2 rounded-md border">
       <h1 className="text-center font-bold mt-1 mb-2">수집 태그 리스트</h1>
-      <AddedTag />
-      <AddedTag />
-      <AddedTag />
-      <AddedTag />
-      <AddedTag />
+
+      {/* Render added tags dynamically */}
+      {selectedFoodTags.map((tag, index) => (
+        <AddedTag key={index} tag={tag} />
+      ))}
+
       <div className="flex justify-center items-center mt-2">
-        <Button onClick={onOpenModal} title={'선택 완료'} />
+        <Button onClick={() => onOpenModal(true)} title={'선택 완료'} />
       </div>
     </div>
   );
 };
 
-export default SideBar;
+export default ModeZeroSideBar;

@@ -1,12 +1,4 @@
 import React, { useState } from 'react';
-import VideoContainer from '../video/VideoContainer';
-import RandomTagList from '../../tag/placeTag/RandomPlaceTagList';
-import SideBar from '../../mode/modeZero/sideBar/SideBar';
-import SelectDoneModal from '../../../../shared/modal/SelectDoneModal';
-import CardSlider from '../../mode/modeTwo/card/CardSlider';
-import ResultCardList from '../../mode/modeTwo/card/ResultCardList';
-import ImageSlider from '../../mode/modeThree/imgSlider/ImageSlider';
-import FinalPlaceCard from '../../mode/modeFour/card/FinalPlaceCard';
 import ModeZero from '../../mode/modeZero/ModeZero';
 import ModeOne from '../../mode/modeOne/ModeOne';
 import ModeTwo from '../../mode/modeTwo/ModeTwo';
@@ -91,8 +83,6 @@ const Room: React.FC = () => {
       return (
         <ModeOne
           shouldAnimate={shouldAnimate}
-          isExpaining={isExpaining}
-          handleFinishExpain={handleFinishExpain}
           handleOpenModal={handleOpenModal}
           isSelectDone={isSelectDone}
           handleSelectionDone={handleSelectionDone}

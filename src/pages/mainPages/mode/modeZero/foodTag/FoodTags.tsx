@@ -60,7 +60,7 @@ const FoodCategorys = [
   { id: '12', title: '초밥1', imgUrl: './JapanStyle.png' },
 ];
 
-const FoodTags: React.FC = () => {
+const FoodTags: React.FC = ({ addFoodTagToSidebar }) => {
   const [categorys, setCategorys] = useState(FoodCategorys);
   const [isClicked, setIsClicked] = useState(null);
 
@@ -74,12 +74,15 @@ const FoodTags: React.FC = () => {
     setCategorys((prevTags) => prevTags.map((tag) => ({ ...tag, isHovered: false })));
   };
 
-  const handleRemoveTag = (idToRemove) => {
+  const handleRemoveTag = (removedTag) => {
     playSound('shot.mp3');
-    setIsClicked(idToRemove);
+    setIsClicked(removedTag.id);
     setTimeout(() => {
-      setCategorys((prevCategorys) => prevCategorys.filter((tag) => tag.id !== idToRemove));
+      setCategorys((prevCategorys) => prevCategorys.filter((tag) => tag.id !== removedTag.id));
       setIsClicked(null);
+      console.log(removedTag);
+
+      addFoodTagToSidebar(removedTag);
     }, 1000);
   };
 
@@ -98,7 +101,7 @@ const FoodTags: React.FC = () => {
             onMouseEnter={() => handleHover(tag.id)}
             onMouseLeave={handleLeave}
           >
-            <button className="relative group" onClick={() => handleRemoveTag(tag.id)}>
+            <button className="relative group" onClick={() => handleRemoveTag(tag)}>
               <img
                 className="cursor-pointer transition-transform transform group-hover:scale-105"
                 src={tag.imgUrl}
@@ -139,7 +142,7 @@ const FoodTags: React.FC = () => {
             onMouseEnter={() => handleHover(tag.id)}
             onMouseLeave={handleLeave}
           >
-            <button className="relative group animate-ease-in-out" onClick={() => handleRemoveTag(tag.id)}>
+            <button className="relative group animate-ease-in-out" onClick={() => handleRemoveTag(tag)}>
               <img
                 className="cursor-pointer transition-transform transform group-hover:scale-105"
                 src={tag.imgUrl}

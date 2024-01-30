@@ -21,12 +21,11 @@ const DUMMY_PLACE = [
 
 const ImageSlider: React.FC = ({ onOpenModal }) => {
   const [bigPlaceImg, setBigPlaceImg] = useState(DUMMY_PLACE[0].imgUrl);
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="flex flex-col justify-center items-center">
       <div>
-        <ImageSilderBg img={bigPlaceImg} setShowModal={setShowModal} />
+        <ImageSilderBg img={bigPlaceImg} />
       </div>
 
       <div className="w-[220px] h-[580px] absolute right-5 top-5 items-center py-1 bg-white rounded-lg shadow-lg border-soild border-2 min-h-40">

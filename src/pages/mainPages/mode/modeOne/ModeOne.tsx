@@ -1,27 +1,38 @@
-import React from 'react';
-import RandomPlaceTagList from '../../tag/placeTag/RandomPlaceTagList';
+import React, { useState } from 'react';
+import RandomPlaceTagList from './placeTag/RandomPlaceTagList';
 import VideoContainer from '../../room/video/VideoContainer';
-import SideBar from '../modeZero/sideBar/SideBar';
 import SelectDoneModal from '../../../../shared/modal/SelectDoneModal';
+import ModeOneSideBar from './sidebar/ModeOneSideBar';
+import ModeOneExpainingModal from './modal/ModeOneExpainingModal';
 
-const ModeOne = ({
-  shouldAnimate,
-  isExpaining,
-  handleFinishExpain,
-  handleOpenModal,
-  isSelectDone,
-  handleSelectionDone,
-  setIsSelectDone,
-}) => {
+const ModeOne = ({ shouldAnimate, handleOpenModal, isSelectDone, handleSelectionDone, setIsSelectDone }) => {
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [isExpaining, setIsExpaining] = useState(true);
+
+  const addTagToSideBar = (tag) => {
+    setSelectedTags((prevTags) => [...prevTags, tag]);
+  };
+
+  const removeTagFromList = (tagsToRemove) => {
+    console.log(selectedTags);
+
+    setSelectedTags((prevTags) => prevTags.filter((tag) => tag.id !== tagsToRemove.id));
+  };
+
+  const handleFinishExpain = () => {
+    setIsExpaining(false);
+  };
+
   return (
     <div className="absolute w-full h-full top-0 left-0 flex bg-[#20B4C8]">
       <div className="w-full m-10 bg-white shadow sm:rounded-lg flex justify-center items-center relative">
         <div className={`${shouldAnimate ? 'animate-fade animate-once animate-ease-linear animate-reverse' : ''}`}>
-          <RandomPlaceTagList />
+          <RandomPlaceTagList addTagToSideBar={addTagToSideBar} />
         </div>
-        <VideoContainer />
+
+        <VideoContainer ModeState={'MODE1'} />
       </div>
-      <SideBar onOpenModal={handleOpenModal} />
+      <ModeOneSideBar onOpenModal={handleOpenModal} selectedTags={selectedTags} onDelete={removeTagFromList} />
       {isSelectDone && (
         <SelectDoneModal
           onYes={handleSelectionDone}
@@ -30,6 +41,7 @@ const ModeOne = ({
           content={'"네"를 누르면 다음 화면으로 넘어갑니다.'}
         />
       )}
+      {isExpaining && <ModeOneExpainingModal mode={'MODE1'} onClose={handleFinishExpain} />}
     </div>
   );
 };

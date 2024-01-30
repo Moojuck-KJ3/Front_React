@@ -1,8 +1,8 @@
-import React from 'react';
-import ExpainingModal from './modal/ModeOneExpainingModal';
-import FoodTags from '../../tag/foodTag/FoodTags';
+import React, { useState } from 'react';
+import ExpainingModal from './modal/ModeZeroExpainingModal';
+import FoodTags from './foodTag/FoodTags';
 import VideoContainer from '../../room/video/VideoContainer';
-import SideBar from './sideBar/SideBar';
+import ModeZeroSideBar from './sideBar/ModeZeroSideBar';
 import SelectDoneModal from '../../../../shared/modal/SelectDoneModal';
 
 const ModeZero: React.FC = ({
@@ -14,17 +14,26 @@ const ModeZero: React.FC = ({
   handleSelectionDone,
   setIsSelectDone,
 }) => {
+  const [selectedFoodTags, setSelectedFoodTags] = useState([]);
+  const addFoodTagToSidebar = (tag) => {
+    setSelectedFoodTags((prevTags) => [...prevTags, tag]);
+  };
+
   return (
     <div className="absolute w-full h-full top-0 left-0 flex bg-[#20B4C8]">
       <div className="w-full m-10 bg-white shadow sm:rounded-lg flex justify-center items-center relative">
         <div className={`${shouldAnimate ? 'animate-fade animate-once animate-ease-linear animate-reverse' : ''}`}>
           {/* 컨텐츠 구역 */}
 
-          {isExpaining ? <ExpainingModal mode={'MODE0'} onClose={handleFinishExpain} /> : <FoodTags />}
+          {isExpaining ? (
+            <ExpainingModal mode={'MODE0'} onClose={handleFinishExpain} />
+          ) : (
+            <FoodTags addFoodTagToSidebar={addFoodTagToSidebar} />
+          )}
         </div>
-        <VideoContainer />
+        <VideoContainer ModeState={'MODE0'} />
       </div>
-      <SideBar onOpenModal={handleOpenModal} />
+      <ModeZeroSideBar onOpenModal={handleOpenModal} selectedFoodTags={selectedFoodTags} />
       {isSelectDone && (
         <SelectDoneModal
           onYes={handleSelectionDone}

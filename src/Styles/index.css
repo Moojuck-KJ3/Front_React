@@ -30,3 +30,50 @@ body {
     transform: translateY(10px); /* You can adjust the translation amount */
   }
 }
+
+.fixed-tag {
+  transition: transform 1.5s ease, opacity 1.5s ease, background 1.5s ease;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.5s ease-out;
+}
+
+@keyframes slideLeftOpacity {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-left-opacity {
+  animation: slideLeftOpacity 0.5s ease-out;
+}
+
+@keyframes cardOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-card {
+  animation: cardOpacity 0.5s ease-out;
+}

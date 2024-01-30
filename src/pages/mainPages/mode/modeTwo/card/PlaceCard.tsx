@@ -1,22 +1,16 @@
 import React from 'react';
 
-const PlaceCard = ({ imgUrl, changeBigPlace, bigPlaceImg }) => {
-  const handleClick = () => {
-    if (bigPlaceImg !== imgUrl) {
-      changeBigPlace(imgUrl);
-    }
-  };
+const PlaceCard = ({ imgUrl }) => {
   return (
     <div
-      className={` rounded-xl my-4 p-2 ${bigPlaceImg === imgUrl ? 'scale-110  bg-white shadow-xl' : 'border-transparent'} cursor-pointer transition-all`}
-      onClick={handleClick}
+      className={` rounded-xl my-4 p-2 hover:scale-105  bg-white shadow-xl border-transparent cursor-move transition-all `}
     >
-      <div className="flex justify-center items-center  bg-center bg-cover rounded-xl shadow-md overflow-hidden mx-auto  bg-gray-300 ">
+      <div className=" flex justify-center items-center  bg-center bg-cover rounded-xl shadow-md overflow-hidden bg-gray-300 ">
         <img
           src={imgUrl}
           alt="PlacePhoto"
-          style={{ width: '120px', height: '120px' }}
-          className="flex shrink-0 object-fit"
+          style={{ width: '140px', height: '140px' }}
+          className="flex shrink-0 object-cover"
         />
       </div>
     </div>
