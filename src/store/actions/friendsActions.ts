@@ -37,7 +37,7 @@ export const getFriends = () => {
     if (response.error) {
       dispatch(openAlertMessage(response.exception?.response?.data));
     } else {
-      dispatch(setFriends(response.data.friends)); // 에러 없이 친구 정보를 잘 가져왔다면 친구 정보 설정 액션 디스패치
+      dispatch(setFriends(response.friends)); // 에러 없이 친구 정보를 잘 가져왔다면 친구 정보 설정 액션 디스패치
     }
   };
 };
