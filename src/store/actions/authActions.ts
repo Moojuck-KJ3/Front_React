@@ -28,14 +28,15 @@ const login = (userDetails, navigate) => {
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      const accessToken = response?.accessToken;
-      const userName = response?.userName;
+      const accessToken = response?.token;
+      const username = response?.username;
+      const email = response?.email;
       
       localStorage.setItem('userToken', accessToken);
 
       const userDetail = {
-        name : userName,
-        email : userDetails.email,
+        name : username,
+        email : email,
       }
 
       dispatch(setUserDetails(userDetail));
@@ -50,13 +51,15 @@ const register = (userDetails, navigate) => {
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      const accessToken = response?.accessToken;
+      const token = response?.token;
+      const username = response?.username;
+      const email = response?.email;
       
-      localStorage.setItem('userToken', accessToken);
+      localStorage.setItem('userToken', token);
 
       const userDetail = {
-        name : userDetails.name,
-        email : userDetails.email,
+        name : username,
+        email : email,
       }
 
       dispatch(setUserDetails(userDetail));

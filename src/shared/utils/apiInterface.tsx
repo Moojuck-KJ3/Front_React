@@ -21,8 +21,10 @@ export interface usersLoginRequest {
 }
 
 export interface usersLoginResponse {
+    id : string;
     username: string;
-    accessToken: string;
+    token: string;
+    email : string;
 }
 
 // Friend API

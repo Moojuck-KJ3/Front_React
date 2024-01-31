@@ -30,8 +30,10 @@ export const login = async (data: apiType.usersLoginRequest) => {
     const response = await apiClient.post('/users/login', data);
 
     const responseData: apiType.usersLoginResponse = {
-      accessToken: response.data.userResponseDto.accessToken,
+      id: response.data.userResponseDto._id,
+      token: response.data.userResponseDto.token,
       username: response.data.userResponseDto.username,
+      email : response.data.userResponseDto.email,
     };
 
     return responseData;
@@ -50,7 +52,10 @@ export const register = async (data: apiType.usersRegisterRequest) => {
     console.log(response)
 
     const responseData: apiType.usersRegisterResponse = {
-      accessToken: response.data.accessToken,
+      id: response.data._id,
+      username: response.data.username,
+      token: response.data.token,
+      email : response.data.email,
     };
 
     return responseData;
