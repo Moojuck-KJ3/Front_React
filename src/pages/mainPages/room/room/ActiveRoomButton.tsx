@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '../../../../shared/components/Avatar';
 import * as roomHandler from '../../../../realtimeCommunication/roomHandler';
-import AudioOnlyButton from '../../entry/appBar/AudioOnlyButton';
 import { Link } from 'react-router-dom';
 
 const ActiveRoomButton = ({ creatorUsername, roomId, amountOfParticipants, isUserInRoom, participants }) => {

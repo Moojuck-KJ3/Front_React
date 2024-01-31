@@ -7,8 +7,6 @@ interface SideBarProps {
 }
 
 const ModeZeroSideBar: React.FC<SideBarProps> = ({ onOpenModal, selectedFoodTags }) => {
-  console.log(selectedFoodTags);
-
   return (
     <div className="fixed flex flex-col h-full right-0 w-[180px] bg-white p-2 rounded-md border">
       <h1 className="text-center font-bold mt-1 mb-2">수집 태그 리스트</h1>

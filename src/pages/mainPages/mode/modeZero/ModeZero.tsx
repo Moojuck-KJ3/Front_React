@@ -4,6 +4,8 @@ import FoodTags from './foodTag/FoodTags';
 import VideoContainer from '../../room/video/VideoContainer';
 import ModeZeroSideBar from './sideBar/ModeZeroSideBar';
 import SelectDoneModal from '../../../../shared/modal/SelectDoneModal';
+import { connect } from 'react-redux';
+import { getActions } from '../../../../store/actions/roomActions';
 
 const ModeZero: React.FC = ({
   shouldAnimate,
@@ -22,9 +24,9 @@ const ModeZero: React.FC = ({
   return (
     <div className="absolute w-full h-full top-0 left-0 flex bg-[#20B4C8]">
       <div className="w-full m-10 bg-white shadow sm:rounded-lg flex justify-center items-center relative">
+        <button onClick={focus}>안녕</button>
         <div className={`${shouldAnimate ? 'animate-fade animate-once animate-ease-linear animate-reverse' : ''}`}>
           {/* 컨텐츠 구역 */}
-
           {isExpaining ? (
             <ExpainingModal mode={'MODE0'} onClose={handleFinishExpain} />
           ) : (
@@ -46,4 +48,16 @@ const ModeZero: React.FC = ({
   );
 };
 
-export default ModeZero;
+const mapStoreStateToProps = ({ room }) => {
+  return {
+    ...room,
+  };
+};
+
+const mapActionToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(mapStoreStateToProps, mapActionToProps)(ModeZero);
