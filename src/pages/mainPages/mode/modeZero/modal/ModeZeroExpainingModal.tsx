@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import MicIcon from '@mui/icons-material/Mic';
 import KaKaoTalkSearchModal from './KaKaoTalkSearchModal';
+import voiceRecoder from '../../modeOne/VoiceRecoder';
+import VoiceRecoder from '../../modeOne/VoiceRecoder';
 
 const MODAL_MODE = {
   MODE0: 'MODE.MODE_NUMBER_ZERO',
@@ -12,8 +14,6 @@ const ModeZeroExpainingModal: React.FC = ({ mode, onClose }) => {
   const [modalmode, setmodalMode] = useState(MODAL_MODE.MODE0);
 
   const handleSelectionDone = () => {
-    console.log('안녕');
-
     if (modalmode === MODAL_MODE.MODE0) {
       console.log('mode0 changed to mode1');
       setmodalMode(MODAL_MODE.MODE1);
@@ -78,19 +78,13 @@ const ModeZeroExpainingModal: React.FC = ({ mode, onClose }) => {
               {/* Add modal content here */}
               <div className="modal-content py-4 text-left px-6">
                 <div className="flex justify-between items-center pb-3">
-                  <p className="text-2xl font-bold">5초 동안 말을 하세요. </p>
+                  <p className="text-2xl font-bold">5초 동안 말을 하세요.</p>
                 </div>
                 <div className="flex justify-center">
                   <p>예시 : 오늘은 한식이나 일식이 먹고 싶어.</p>
                 </div>
-
-                <div className="mt-4 flex justify-end">
-                  <button
-                    onClick={handleSelectionDone}
-                    className="px-4 bg-purple-500 p-3 ml-3 rounded-lg text-white hover:bg-purple-400"
-                  >
-                    <MicIcon />
-                  </button>
+                <div className="flex justify-center">
+                  <VoiceRecoder onClose={onClose} />
                 </div>
               </div>
             </div>

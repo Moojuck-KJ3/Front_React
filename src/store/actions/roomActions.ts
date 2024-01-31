@@ -39,7 +39,6 @@ export const getActions = (dispatch) => {
 };
 
 export const setInitRoom = (InitRoom) => {
-  console.log('setInitRoom is called!');
   return {
     type: roomActions.SET_IS_INIT_ROOM,
     InitRoom,
@@ -47,9 +46,6 @@ export const setInitRoom = (InitRoom) => {
 };
 
 export const setRoomMode = (roomMode) => {
-  console.log('setRoomMode is called!');
-  console.log(roomMode);
-
   return {
     type: roomActions.SET_ROOM_MODE,
     roomMode,

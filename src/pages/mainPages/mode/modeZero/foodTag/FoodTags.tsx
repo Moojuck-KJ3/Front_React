@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 
 const FoodCategorys = [
   {
@@ -75,7 +74,6 @@ const FoodTags: React.FC = ({ addFoodTagToSidebar }) => {
   };
 
   const handleRemoveTag = (removedTag) => {
-    playSound('shot.mp3');
     setIsClicked(removedTag.id);
     setTimeout(() => {
       setCategorys((prevCategorys) => prevCategorys.filter((tag) => tag.id !== removedTag.id));
@@ -84,11 +82,6 @@ const FoodTags: React.FC = ({ addFoodTagToSidebar }) => {
 
       addFoodTagToSidebar(removedTag);
     }, 1000);
-  };
-
-  const playSound = (soundFileName) => {
-    const audio = new Audio(`./${soundFileName}`);
-    audio.play();
   };
 
   return (
@@ -182,9 +175,7 @@ const FoodTags: React.FC = ({ addFoodTagToSidebar }) => {
             key={tag.id}
             onMouseEnter={() => handleHover(tag.id)}
             onMouseLeave={handleLeave}
-          >
-            {isClicked && <img className="" src="./Gun.png" alt="" />}
-          </div>
+          ></div>
         ))}
       </div>
     </div>

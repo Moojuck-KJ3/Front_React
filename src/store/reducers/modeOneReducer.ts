@@ -1,5 +1,6 @@
 const initState = {
   placeTagLists: [],
+  
   userA: {
     selectList: [],
     transcript: null,

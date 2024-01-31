@@ -9,6 +9,8 @@ let socket = null;
 
 export const connectWithSocketServer = (userDetails) => {
   const jwtToken = userDetails.token;
+  console.log(userDetails);
+  console.log(jwtToken);
 
   socket = io('http://localhost:3000', {
     auth: {
@@ -67,6 +69,11 @@ export const connectWithSocketServer = (userDetails) => {
   socket.on('room-participant-left', (data) => {
     console.log('user left room');
     webRTCHandler.handleParticipantLeftRoom(data);
+  });
+
+  socket.on('room-mode-change', (data) => {
+    const { roomMode } = data;
+    roomHandler.setRoomMode(roomMode);
   });
 };
 

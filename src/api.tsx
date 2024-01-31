@@ -2,7 +2,7 @@ import axios from 'axios';
 import { logout } from './shared/utils/auth';
 
 const apiClient = axios.create({
-  baseURL: 'http://backend-nest.fly.dev/api',
+  baseURL: 'http://localhost:3000/api',
   timeout: 1000,
 });
 
@@ -24,7 +24,7 @@ apiClient.interceptors.request.use(
 // public routes
 export const login = async (data) => {
   try {
-    return await apiClient.post('/users/login', data);
+    return await apiClient.post('/auth/login', data);
   } catch (exception) {
     return {
       error: true,
@@ -35,7 +35,7 @@ export const login = async (data) => {
 
 export const register = async (data) => {
   try {
-    return await apiClient.post('/users/register', data);
+    return await apiClient.post('/auth/register', data);
   } catch (exception) {
     return {
       error: true,
@@ -80,6 +80,9 @@ export const rejectFriendInvitation = async (data) => {
     };
   }
 };
+
+
+
 
 const checkResponseCode = (exception) => {
   const responseCode = exception?.response?.status;

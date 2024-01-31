@@ -24,7 +24,6 @@ const ModeZero: React.FC = ({
   return (
     <div className="absolute w-full h-full top-0 left-0 flex bg-[#20B4C8]">
       <div className="w-full m-10 bg-white shadow sm:rounded-lg flex justify-center items-center relative">
-        <button onClick={focus}>안녕</button>
         <div className={`${shouldAnimate ? 'animate-fade animate-once animate-ease-linear animate-reverse' : ''}`}>
           {/* 컨텐츠 구역 */}
           {isExpaining ? (

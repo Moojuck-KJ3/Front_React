@@ -15,7 +15,8 @@ const MODE = {
   MODE4: 'MODE_NUMBER_FOUR',
 };
 
-const Room: React.FC = ({ roomMode, setRoomMode }) => {
+const Room: React.FC = () => {
+  const [roomMode, setRoomMode] = useState(MODE.MODE0);
   const [isSelectDone, setIsSelectDone] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const [isExpaining, setIsExpaining] = useState(true);
@@ -30,26 +31,20 @@ const Room: React.FC = ({ roomMode, setRoomMode }) => {
 
     setTimeout(() => {
       if (roomMode === MODE.MODE0) {
-        console.log('mode0 changed to mode1');
         setRoomMode(MODE.MODE1);
-        console.log(roomMode);
-
         setShouldAnimate(false);
       }
       if (roomMode === MODE.MODE1) {
-        console.log('mode1 changed to mode2');
         setRoomMode(MODE.MODE2);
         setShouldAnimate(false);
       }
 
       if (roomMode === MODE.MODE2) {
-        console.log('mode2 changed to mode3');
         setRoomMode(MODE.MODE3);
         setShouldAnimate(false);
       }
 
       if (roomMode === MODE.MODE3) {
-        console.log('mode3 changed to mode4');
         setRoomMode(MODE.MODE4);
         setShouldAnimate(false);
       }

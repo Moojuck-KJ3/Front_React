@@ -22,7 +22,7 @@ const ModeTwo: React.FC = ({
           <div className="w-full flex justify-center gap-24">
             <PlaceCombineArea />
           </div>
-          <ModeTwoSideBar />
+          <ModeTwoSideBar onOpenModal={handleOpenModal} />
         </div>
       </div>
 
