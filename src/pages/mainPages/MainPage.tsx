@@ -10,15 +10,14 @@ import Entry from './entry/Entry';
 const MainPage: React.FC = ({ setUserDetails, isUserInRoom }) => {
   useEffect(() => {
     const userDetails = localStorage.getItem('user');
-    console.log(userDetails)
 
     if (!userDetails) {
       logout();
     } else {
-      // setUserDetails(JSON.parse(userDetails));
-      // connectWithSocketServer(JSON.parse(userDetails));
-      setUserDetails(userDetails);
-      connectWithSocketServer(userDetails);
+      setUserDetails(JSON.parse(userDetails));
+      connectWithSocketServer(JSON.parse(userDetails));
+      // setUserDetails(userDetails);
+      // connectWithSocketServer(userDetails);
       getFriends();
     }
   });
