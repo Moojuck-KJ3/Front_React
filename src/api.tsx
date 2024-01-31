@@ -5,6 +5,7 @@ import * as apiType from './shared/utils/apiInterface';
 const apiClient = axios.create({
   baseURL: 'https://backend-nest.fly.dev/api', // main url
   //baseURL: 'https://backend-nest.fly.dev/cats', // test url
+  //baseURL: 'http://localhost:8080/api',
   timeout: 3000,
 });
 
@@ -29,10 +30,10 @@ export const login = async (data: apiType.usersLoginRequest) => {
     const response = await apiClient.post('/users/login', data);
 
     const responseData: apiType.usersLoginResponse = {
-      id: response.data.userResponseDto._id,
-      token: response.data.userResponseDto.token,
-      username: response.data.userResponseDto.username,
-      email : response.data.userResponseDto.email,
+      id: response.data.userDetails._id,
+      token: response.data.userDetails.token,
+      username: response.data.userDetails.username,
+      email : response.data.userDetails.email,
     };
 
     return responseData;
@@ -52,9 +53,9 @@ export const register = async (data: apiType.usersRegisterRequest) => {
 
     const responseData: apiType.usersRegisterResponse = {
       id: response.data._id,
-      username: response.data.username,
-      token: response.data.token,
-      email : response.data.email,
+      username: response.data.userDetails.username,
+      token: response.data.userDetails.token,
+      email : response.data.userDetails.email,
     };
 
     return responseData;

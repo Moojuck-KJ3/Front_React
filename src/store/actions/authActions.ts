@@ -24,7 +24,6 @@ const setUserDetails = (userDetails) => {
 const login = (userDetails, navigate) => {
   return async (dispatch) => {
     const response = await api.login(userDetails);
-    console.log(response);
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
@@ -68,7 +67,7 @@ const register = (userDetails, navigate) => {
         _id : id,
       }
       
-      localStorage.setItem('user', userDetail);
+      localStorage.setItem('user', JSON.stringify(userDetail));
 
       dispatch(setUserDetails(userDetail));
       navigate('/main');
