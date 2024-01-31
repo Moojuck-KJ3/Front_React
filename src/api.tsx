@@ -10,11 +10,13 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    const userDetails = localStorage.getItem('userToken');
+    const userDetails = localStorage.getItem('user');
+    console.log(userDetails)
 
     if (userDetails) {
-      //const token = JSON.parse(userDetails).token;
-      const token = userDetails;
+      const token = JSON.parse(userDetails).token;
+      console.log(token)
+      //const token = userDetails.token;
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -69,6 +71,8 @@ export const register = async (data: apiType.usersRegisterRequest) => {
 
 // secure routes
 export const sendFriendInvitation = async (data) => {
+  console.log(data);
+  
   try {
     return await apiClient.post('/friends/requests', data);
   } catch (exception) {
