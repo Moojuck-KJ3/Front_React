@@ -11,7 +11,10 @@ export interface usersRegisterRequest {
 }
 
 export interface usersRegisterResponse {
-    accessToken: string;
+    id : string;
+    username: string;
+    token: string;
+    email : string;
 }
 
 // login API
