@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 import { logout } from '../../utils/auth';
 
 const AuthHeader: React.FC = () => {
+  const [userName, setUserName] = React.useState('');
+
+  React.useEffect(() => {
+    const userDetails = JSON.parse(localStorage.getItem('user'));
+    if (userDetails && userDetails.username) {
+      setUserName(userDetails.username);
+    }
+  }, []);
+
   const handleLogout = () => {
     logout();
   };
@@ -30,7 +39,7 @@ const AuthHeader: React.FC = () => {
             </button>
           </Link>
           <div></div>
-          <h1 className="font-semibold">안녕하세요, 마찬옥님</h1>
+          <h1 className="font-semibold">안녕하세요, {userName}님</h1>
           <Link to={'/'}>
             <button
               onClick={handleLogout}
