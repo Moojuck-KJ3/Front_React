@@ -7,9 +7,10 @@ import RegisterPageHeader from './RegisterPageHeader';
 import RegisterPageInputs from './RegisterPageInputs';
 import RegisterPageFooter from './RegisterPageFooter';
 import RegisterPageSideImg from './RegisterPageSideImg';
+import * as apiType from '../../../shared/utils/apiInterface';
 
 interface RegisterPageProps {
-  register: (userDetails: { email: string; username: string; password: string }, navigate: any) => void;
+  register: (userDetails: apiType.usersRegisterRequest, navigate: any) => void;
 }
 
 const RegisterPage: React.FC<RegisterPageProps> = ({ register }) => {
@@ -20,7 +21,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ register }) => {
   const [isFormVaild, setIsFormVaild] = useState<boolean>(false);
 
   const handleRegister = () => {
-    const userDetails = {
+    const userDetails : apiType.usersRegisterRequest = {
       email,
       username,
       password,

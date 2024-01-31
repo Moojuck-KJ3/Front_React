@@ -27,7 +27,7 @@ apiClient.interceptors.request.use(
 // public routes
 export const login = async (data:apiType.usersLoginRequest) => {
   try {
-    const response = await apiClient.post<apiType.usersLoginResponse>('/users/login', data);
+    const response = await apiClient.post('/users/login', data);
 
     const responseData : apiType.usersLoginResponse = {
       accessToken : response.data.accessToken,
@@ -43,9 +43,15 @@ export const login = async (data:apiType.usersLoginRequest) => {
   }
 };
 
-export const register = async (data) => {
+export const register = async (data : apiType.usersRegisterRequest) => {
   try {
-    return await apiClient.post('/users/register', data);
+    const response = await apiClient.post('/users/register', data)
+
+    const responseData : apiType.usersRegisterResponse = {
+      accessToken : response.data.accessToken
+    }
+
+    return responseData;
   } catch (exception) {
     return {
       error: true,

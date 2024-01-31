@@ -8,9 +8,10 @@ import LoginPageFooter from './LoginPageFooter';
 import LoginPageHeader from './LoginPageHeader';
 import LoginPageSideImg from './LoginPageSideImg';
 import store from '../../../store/store';
+import * as apiType from '../../../shared/utils/apiInterface';
 
 interface LoginPageProps {
-  login: (userDetails: { email: string; password: string }, navigate: any) => void;
+  login: (userDetails: apiType.usersLoginRequest, navigate: any) => void;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ login }) => {
@@ -20,7 +21,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ login }) => {
   const [isFormVaild, setIsFormVaild] = useState(false);
 
   const handleLogin = async() => {
-    const userDetails = {
+    const userDetails : apiType.usersLoginRequest = {
       email,
       password,
     };
