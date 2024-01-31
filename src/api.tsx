@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { logout } from './shared/utils/auth';
+import * as apiType from './shared/utils/apiInterface';
 
 const apiClient = axios.create({
   baseURL: 'https://backend-nest.fly.dev/api', // main url
@@ -24,9 +25,16 @@ apiClient.interceptors.request.use(
 );
 
 // public routes
-export const login = async (data) => {
+export const login = async (data:apiType.usersLoginRequest) => {
   try {
-    return await apiClient.post('/users/login', data);
+    const response = await apiClient.post<apiType.usersLoginResponse>('/users/login', data);
+
+    const responseData : apiType.usersLoginResponse = {
+      accessToken : response.data.accessToken,
+      username : response.data.username,
+    }
+
+    return responseData;
   } catch (exception) {
     return {
       error: true,
@@ -97,9 +105,15 @@ export const getMainData = async () => {
 };
 
 // Room API
-export const roomSetAddress = async (data) => {
+// 1. 모든 요청은 roomId를 파라미터로 받는다
+// 2. get 요청엔 response가 있음
+// 3. post 요청엔 response가 없음 (socket.io로 통신하고 해당 방의 모든 유저에게 브로드캐스트하는 방식)
+
+// 음식 종류 수집 페이지에서 유저가 말한 음식 종류를 서버에 전달한다
+// data : {userSpeech : string}
+export const sendFoodCategorySpeech = async (roomId,data) => {
   try {
-    return await apiClient.post('/rooms/get-address', data);
+    return await apiClient.post(`/rooms/food-category/speech?roomId=${roomId}`, data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -109,9 +123,11 @@ export const roomSetAddress = async (data) => {
   }
 };
 
-export const roomGetFoodCategory = async (data) => {
+// 음식 종류 수집 페이지에서 유저가 선택하여 추가하거나 지운 음식 종류를 서버에 전달한다
+// data : {“categoryId” : string, “isDelete” : boolean}
+export const sendFoodCategoryButton = async (roomId,data) => {
   try {
-    return await apiClient.post('/rooms/get-foodCategory', data);
+    return await apiClient.post(`/rooms/food-category?roomId=${roomId}`, data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -121,9 +137,10 @@ export const roomGetFoodCategory = async (data) => {
   }
 };
 
-export const roomGetMoodKeyword = async (data) => {
+// 무드 키워드 수집 모드에서, 처음에 get 요청을 보내 미리 뜰 분위기 키워드 표시
+export const getMoodKeyword = async (roomId) => {
   try {
-    return await apiClient.post('/rooms/get-moodKeyword', data);
+    return await apiClient.get(`/rooms/mood-keyword?roomId = ${roomId}`);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -133,9 +150,11 @@ export const roomGetMoodKeyword = async (data) => {
   }
 };
 
-export const roomSendTagByAudio = async (data) => {
+// 무드 키워드 수집 모드에서 유저가 말한 무드 키워드를 서버에 전달한다
+// data : {userSpeech : string}
+export const postMoodKeywordSpeech = async (roomId,data) => {
   try {
-    return await apiClient.post('/rooms/get-tags-by-audio', data);
+    return await apiClient.post(`/rooms/mood-keyword/speech?roomId = ${roomId}`,data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -145,9 +164,11 @@ export const roomSendTagByAudio = async (data) => {
   }
 };
 
-export const roomSelectMoodKeyword = async (data) => {
+// 무드 키워드 수집 모드에서 유저가 선택하거나 지운 무드 키워드를 서버에 전달한다
+// data : {“keywordId” : string, “isDelete” : boolean}
+export const postMoodKeywordButton = async (roomId,data) => {
   try {
-    return await apiClient.post('/rooms/select-moodKeyword', data);
+    return await apiClient.post(`/rooms/mood-keyword?roomId = ${roomId}`,data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -157,10 +178,10 @@ export const roomSelectMoodKeyword = async (data) => {
   }
 };
 
-// get 요청이므로, params가 url에 붙는다
-export const roomGetRecommendRestaurant = async (params) => {
+// 교집합 식당 추천 모드에서 기본 식당들을 받는다
+export const getKeywordsToRests = async (roomId) => {
   try {
-    return await apiClient.get('/rooms/keywords2rests/data',{params});
+    return await apiClient.get(`/rooms/keywords-to-rests?roomId = ${roomId}`);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -170,11 +191,12 @@ export const roomGetRecommendRestaurant = async (params) => {
   }
 };
 
-// 교집합 식당 추천 페이지에서 유저가 원하는 식당이 없어서
-// 새로운 조합을 시도
-export const roomRequestNewCombine = async (data) => {
+// 교집합 식당 추천 모드에서 식당을 슬롯에 넣어 조합을 시도한다
+// 두 슬롯이 모두 차있어야 반응이 오기에, response body는 없음
+// data : {"restId" : string, "slotIndex" : number,}
+export const postKeywordsToRests = async (roomId,data) => {
   try {
-    return await apiClient.post('/rooms/keywords2rests/new-combi', data);
+    return await apiClient.post(`/rooms/keywords-to-rests?roomId = ${roomId}`,data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -184,10 +206,10 @@ export const roomRequestNewCombine = async (data) => {
   }
 };
 
-// get 요청이므로, params가 url에 붙는다
-export const roomRestCallPassData = async (params) => {
+// 의사 결정 모드에서 식당들을 받는다
+export const getRestDecision = async (roomId) => {
   try {
-    return await apiClient.get('/rooms/rest-call-pass/data',{params});
+    return await apiClient.get(`/rooms/rest-decision?roomId = ${roomId}`);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -197,10 +219,11 @@ export const roomRestCallPassData = async (params) => {
   }
 };
 
-// 의사 결정 페이지에서 식당 결정 제출
-export const roomRestCallPassSuggest = async (data) => {
+// 의사 결정 모드에서 o,x 를 눌러 식당에 대한 의사를 표현한다
+// data : {"restId" : string, "isAgree" : boolean}
+export const postRestDecision = async (roomId,data) => {
   try {
-    return await apiClient.post('/rooms/rest-call-pass', data);
+    return await apiClient.post(`/rooms/rest-decision?roomId = ${roomId}`,data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -210,10 +233,10 @@ export const roomRestCallPassSuggest = async (data) => {
   }
 };
 
-// get 요청이므로, params가 url에 붙는다
-export const roomGetResultData = async (params) => {
+// 결과 페이지에서 선택된 식당과 선택이 되지 못하였지만 추천된 식당 리스트를 받는다
+export const getResult = async (roomId) => {
   try {
-    return await apiClient.get('/rooms/result/data',{params});
+    return await apiClient.get(`/rooms/result?roomId = ${roomId}`);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -222,6 +245,19 @@ export const roomGetResultData = async (params) => {
     };
   }
 };
+
+// room에서 의사결정 버튼 누른 경우에 대한 get 요청
+export const selectDone = async (roomId) => {
+  try {
+    return await apiClient.get(`/rooms/result?roomId = ${roomId}`);
+  } catch (exception) {
+    checkResponseCode(exception);
+    return {
+      error: true,
+      exception,
+    };
+  }
+}
 
 const checkResponseCode = (exception) => {
   const responseCode = exception?.response?.status;

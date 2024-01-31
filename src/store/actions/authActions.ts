@@ -32,8 +32,8 @@ const login = (userDetails, navigate) => {
       // localStorage.setItem('user', JSON.stringify(userDetails));
 
       //dispatch(setUserDetails(userDetails));
-      const accessToken = response?.data?.accessToken;
-      const userName = response?.data?.userName;
+      const accessToken = response?.accessToken;
+      const userName = response?.userName;
       
       //console.log(accessToken);
       localStorage.setItem('userToken', accessToken);
