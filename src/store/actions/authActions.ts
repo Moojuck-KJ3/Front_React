@@ -28,14 +28,9 @@ const login = (userDetails, navigate) => {
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      // const { userDetails } = response?.data;
-      // localStorage.setItem('user', JSON.stringify(userDetails));
-
-      //dispatch(setUserDetails(userDetails));
       const accessToken = response?.accessToken;
       const userName = response?.userName;
       
-      //console.log(accessToken);
       localStorage.setItem('userToken', accessToken);
 
       const userDetail = {
@@ -55,14 +50,8 @@ const register = (userDetails, navigate) => {
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      // const { userDetails } = response?.data;
-      // localStorage.setItem('user', JSON.stringify(userDetails));
-
-      // console.log(response);
-      // console.log(response?.data);
-      const accessToken = response?.data?.accessToken;
+      const accessToken = response?.accessToken;
       
-      //console.log(accessToken);
       localStorage.setItem('userToken', accessToken);
 
       const userDetail = {

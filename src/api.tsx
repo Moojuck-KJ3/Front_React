@@ -25,14 +25,14 @@ apiClient.interceptors.request.use(
 );
 
 // public routes
-export const login = async (data:apiType.usersLoginRequest) => {
+export const login = async (data: apiType.usersLoginRequest) => {
   try {
-    const response = await apiClient.post<apiType.usersLoginResponse>('/users/login', data);
+    const response = await apiClient.post('/users/login', data);
 
-    const responseData : apiType.usersLoginResponse = {
-      accessToken : response.data.accessToken,
-      username : response.data.username,
-    }
+    const responseData: apiType.usersLoginResponse = {
+      accessToken: response.data.accessToken,
+      username: response.data.username,
+    };
 
     return responseData;
   } catch (exception) {
@@ -43,9 +43,15 @@ export const login = async (data:apiType.usersLoginRequest) => {
   }
 };
 
-export const register = async (data) => {
+export const register = async (data: apiType.usersRegisterRequest) => {
   try {
-    return await apiClient.post('/users/register', data);
+    const response = await apiClient.post('/users/register', data);
+
+    const responseData: apiType.usersRegisterResponse = {
+      accessToken: response.data.accessToken,
+    };
+
+    return responseData;
   } catch (exception) {
     return {
       error: true,
@@ -94,7 +100,13 @@ export const rejectFriendInvitation = async (data) => {
 // Main Page에서 Data 받는 Get API
 export const getMainData = async () => {
   try {
-    return await apiClient.get('/main');
+    const response = await apiClient.get('/main');
+
+    const responseData: apiType.mainGetResponse = {
+      friends: response.data.friends,
+    };
+
+    return responseData;
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -111,7 +123,7 @@ export const getMainData = async () => {
 
 // 음식 종류 수집 페이지에서 유저가 말한 음식 종류를 서버에 전달한다
 // data : {userSpeech : string}
-export const sendFoodCategorySpeech = async (roomId,data) => {
+export const sendFoodCategorySpeech = async (roomId: string, data: apiType.sendFoodCategorySpeechRequest) => {
   try {
     return await apiClient.post(`/rooms/food-category/speech?roomId=${roomId}`, data);
   } catch (exception) {
@@ -125,7 +137,7 @@ export const sendFoodCategorySpeech = async (roomId,data) => {
 
 // 음식 종류 수집 페이지에서 유저가 선택하여 추가하거나 지운 음식 종류를 서버에 전달한다
 // data : {“categoryId” : string, “isDelete” : boolean}
-export const sendFoodCategoryButton = async (roomId,data) => {
+export const sendFoodCategoryButton = async (roomId: string, data: apiType.sendFoodCategoryButtonRequest) => {
   try {
     return await apiClient.post(`/rooms/food-category?roomId=${roomId}`, data);
   } catch (exception) {
@@ -138,9 +150,14 @@ export const sendFoodCategoryButton = async (roomId,data) => {
 };
 
 // 무드 키워드 수집 모드에서, 처음에 get 요청을 보내 미리 뜰 분위기 키워드 표시
-export const getMoodKeyword = async (roomId) => {
+export const getMoodKeyword = async (roomId: string) => {
   try {
-    return await apiClient.get(`/rooms/mood-keyword?roomId = ${roomId}`);
+    const response = await apiClient.get(`/rooms/mood-keyword?roomId=${roomId}`);
+    const responseData: apiType.getMoodKeywordResponse = {
+      moodKeywords: response.data.moodKeywords,
+    };
+
+    return responseData;
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -152,9 +169,9 @@ export const getMoodKeyword = async (roomId) => {
 
 // 무드 키워드 수집 모드에서 유저가 말한 무드 키워드를 서버에 전달한다
 // data : {userSpeech : string}
-export const postMoodKeywordSpeech = async (roomId,data) => {
+export const postMoodKeywordSpeech = async (roomId: string, data: apiType.sendMoodKeywordSpeechRequest) => {
   try {
-    return await apiClient.post(`/rooms/mood-keyword/speech?roomId = ${roomId}`,data);
+    return await apiClient.post(`/rooms/mood-keyword/speech?roomId=${roomId}`, data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -166,9 +183,9 @@ export const postMoodKeywordSpeech = async (roomId,data) => {
 
 // 무드 키워드 수집 모드에서 유저가 선택하거나 지운 무드 키워드를 서버에 전달한다
 // data : {“keywordId” : string, “isDelete” : boolean}
-export const postMoodKeywordButton = async (roomId,data) => {
+export const postMoodKeywordButton = async (roomId: string, data: apiType.sendMoodKeywordButtonRequest) => {
   try {
-    return await apiClient.post(`/rooms/mood-keyword?roomId = ${roomId}`,data);
+    return await apiClient.post(`/rooms/mood-keyword?roomId=${roomId}`, data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -179,9 +196,15 @@ export const postMoodKeywordButton = async (roomId,data) => {
 };
 
 // 교집합 식당 추천 모드에서 기본 식당들을 받는다
-export const getKeywordsToRests = async (roomId) => {
+export const getKeywordsToRests = async (roomId: string) => {
   try {
-    return await apiClient.get(`/rooms/keywords-to-rests?roomId = ${roomId}`);
+    const response = await apiClient.get(`/rooms/keywords-to-rests?roomId=${roomId}`);
+
+    const responseData: apiType.getKeywordToRestsResponse = {
+      restaurants: response.data.restaurants,
+    };
+
+    return responseData;
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -194,9 +217,9 @@ export const getKeywordsToRests = async (roomId) => {
 // 교집합 식당 추천 모드에서 식당을 슬롯에 넣어 조합을 시도한다
 // 두 슬롯이 모두 차있어야 반응이 오기에, response body는 없음
 // data : {"restId" : string, "slotIndex" : number,}
-export const postKeywordsToRests = async (roomId,data) => {
+export const postKeywordsToRests = async (roomId:string, data:apiType.postKeywordToRestsRequest) => {
   try {
-    return await apiClient.post(`/rooms/keywords-to-rests?roomId = ${roomId}`,data);
+    return await apiClient.post(`/rooms/keywords-to-rests?roomId=${roomId}`, data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -207,9 +230,14 @@ export const postKeywordsToRests = async (roomId,data) => {
 };
 
 // 의사 결정 모드에서 식당들을 받는다
-export const getRestDecision = async (roomId) => {
+export const getRestDecision = async (roomId: string) => {
   try {
-    return await apiClient.get(`/rooms/rest-decision?roomId = ${roomId}`);
+    const response = await apiClient.get(`/rooms/rest-decision?roomId=${roomId}`);
+    const responseData: apiType.getDecisionRestsResponse = {
+      restaurants: response.data.restaurants,
+    };
+    
+    return responseData;
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -221,9 +249,9 @@ export const getRestDecision = async (roomId) => {
 
 // 의사 결정 모드에서 o,x 를 눌러 식당에 대한 의사를 표현한다
 // data : {"restId" : string, "isAgree" : boolean}
-export const postRestDecision = async (roomId,data) => {
+export const postRestDecision = async (roomId:string, data:apiType.postDecisionRestsRequest) => {
   try {
-    return await apiClient.post(`/rooms/rest-decision?roomId = ${roomId}`,data);
+    return await apiClient.post(`/rooms/rest-decision?roomId=${roomId}`, data);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -234,9 +262,16 @@ export const postRestDecision = async (roomId,data) => {
 };
 
 // 결과 페이지에서 선택된 식당과 선택이 되지 못하였지만 추천된 식당 리스트를 받는다
-export const getResult = async (roomId) => {
+export const getResult = async (roomId:string) => {
   try {
-    return await apiClient.get(`/rooms/result?roomId = ${roomId}`);
+    const response = await apiClient.get(`/rooms/result?roomId=${roomId}`);
+    const responseData: apiType.getResultRestsResponse = {
+      pickRest : response.data.pickRest,
+      restaurants: response.data.restaurants,
+    };
+
+    return responseData;
+
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -247,9 +282,9 @@ export const getResult = async (roomId) => {
 };
 
 // room에서 의사결정 버튼 누른 경우에 대한 get 요청
-export const selectDone = async (roomId) => {
+export const selectDone = async (roomId:string) => {
   try {
-    return await apiClient.get(`/rooms/result?roomId = ${roomId}`);
+    return await apiClient.get(`/rooms/result?roomId=${roomId}`);
   } catch (exception) {
     checkResponseCode(exception);
     return {
@@ -257,7 +292,7 @@ export const selectDone = async (roomId) => {
       exception,
     };
   }
-}
+};
 
 const checkResponseCode = (exception) => {
   const responseCode = exception?.response?.status;
