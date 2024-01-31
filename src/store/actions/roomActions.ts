@@ -9,7 +9,10 @@ export const roomActions = {
   SET_REMOTE_STREAMS: 'ROOM.SET_REMOTE_STREAMS',
   SET_AUDIO_ONLY: 'ROOM.SET_AUDIO_ONLY',
   SET_SCREEN_SHARE_STREAM: 'ROOM.SET_SCREEN_SHARE_STREAM',
+
   SET_IS_USER_JOINED_WITH_ONLY_AUDIO: 'ROOM.SET_IS_USER_JOINED_WITH_ONLY_AUDIO',
+  SET_IS_INIT_ROOM: 'SET_IS_INIT_ROOM',
+  SET_ROOM_MODE: 'ROOM.SET_ROOM_MODE',
 };
 
 export const setOpenRoom = (isUserRoomCreator = false, isUserInRoom = false) => {
@@ -23,7 +26,33 @@ export const setOpenRoom = (isUserRoomCreator = false, isUserInRoom = false) => 
 export const getActions = (dispatch) => {
   return {
     setAudioOnly: (audioOnly) => dispatch(setAudioOnly(audioOnly)),
-    setScreenSharingStream: (stream) => dispatch(setScreenSharingStream(stream)),
+    setScreenSharingStream: (stream) => {
+      dispatch(setScreenSharingStream(stream));
+    },
+    setInitRoom: (InitRoom) => {
+      dispatch(setInitRoom(InitRoom));
+    },
+    setRoomMode: (roomMode) => {
+      dispatch(setRoomMode(roomMode));
+    },
+  };
+};
+
+export const setInitRoom = (InitRoom) => {
+  console.log('setInitRoom is called!');
+  return {
+    type: roomActions.SET_IS_INIT_ROOM,
+    InitRoom,
+  };
+};
+
+export const setRoomMode = (roomMode) => {
+  console.log('setRoomMode is called!');
+  console.log(roomMode);
+
+  return {
+    type: roomActions.SET_ROOM_MODE,
+    roomMode,
   };
 };
 
@@ -42,9 +71,6 @@ export const setActiveRooms = (activeRooms) => {
 };
 
 export const setLocalStream = (localStream) => {
-  console.log('setLocalStream');
-  console.log(localStream);
-
   return {
     type: roomActions.SET_LOCAL_STREAM,
     localStream,

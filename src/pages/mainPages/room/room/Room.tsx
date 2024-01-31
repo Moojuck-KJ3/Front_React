@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModeZero from '../../mode/modeZero/ModeZero';
 import ModeOne from '../../mode/modeOne/ModeOne';
 import ModeTwo from '../../mode/modeTwo/ModeTwo';
 import ModeThree from '../../mode/modeThree/ModeThree';
 import ModeFour from '../../mode/modeFour/ModeFour';
+import { connect } from 'react-redux';
+import { getActions } from '../../../../store/actions/roomActions';
 
 const MODE = {
-  MODE0: 'MODE.MODE_NUMBER_ZERO',
-  MODE1: 'MODE.MODE_NUMBER_ONE',
-  MODE2: 'MODE.MODE_NUMBER_TWO',
-  MODE3: 'MODE.MODE_NUMBER_THREE',
-  MODE4: 'MODE.MODE_NUMBER_FOUR',
+  MODE0: 'MODE_NUMBER_ZERO',
+  MODE1: 'MODE_NUMBER_ONE',
+  MODE2: 'MODE_NUMBER_TWO',
+  MODE3: 'MODE_NUMBER_THREE',
+  MODE4: 'MODE_NUMBER_FOUR',
 };
 
-const Room: React.FC = () => {
+const Room: React.FC = ({ roomMode, setRoomMode }) => {
   const [isSelectDone, setIsSelectDone] = useState(false);
-  const [mode, setMode] = useState(MODE.MODE0);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const [isExpaining, setIsExpaining] = useState(true);
 
@@ -28,33 +29,32 @@ const Room: React.FC = () => {
     setIsSelectDone(false);
 
     setTimeout(() => {
-      if (mode === MODE.MODE0) {
+      if (roomMode === MODE.MODE0) {
         console.log('mode0 changed to mode1');
-        setMode(MODE.MODE1);
+        setRoomMode(MODE.MODE1);
+        console.log(roomMode);
+
         setShouldAnimate(false);
       }
-      if (mode === MODE.MODE1) {
+      if (roomMode === MODE.MODE1) {
         console.log('mode1 changed to mode2');
-        setMode(MODE.MODE2);
+        setRoomMode(MODE.MODE2);
         setShouldAnimate(false);
       }
 
-      if (mode === MODE.MODE2) {
+      if (roomMode === MODE.MODE2) {
         console.log('mode2 changed to mode3');
-        setMode(MODE.MODE3);
+        setRoomMode(MODE.MODE3);
         setShouldAnimate(false);
       }
 
-      if (mode === MODE.MODE3) {
+      if (roomMode === MODE.MODE3) {
         console.log('mode3 changed to mode4');
-        setMode(MODE.MODE4);
+        setRoomMode(MODE.MODE4);
         setShouldAnimate(false);
       }
-    }, 3000); // Adjust the delay time as needed
-
+    }, 3000);
     setIsSelectDone(false);
-
-    // To Do : something else when mode changes
   };
 
   const handleOpenModal = () => {
@@ -65,7 +65,7 @@ const Room: React.FC = () => {
     setIsExpaining(false);
   };
 
-  switch (mode) {
+  switch (roomMode) {
     case MODE.MODE0:
       return (
         <ModeZero
@@ -134,4 +134,16 @@ const Room: React.FC = () => {
   }
 };
 
-export default Room;
+const mapStoreStateToProps = ({ room }) => {
+  return {
+    ...room,
+  };
+};
+
+const mapActionToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(mapStoreStateToProps, mapActionToProps)(Room);

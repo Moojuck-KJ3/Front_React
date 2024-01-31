@@ -12,7 +12,7 @@ const MainContainer = styled('div')({
   overflow: 'auto',
 });
 
-const PendingInvitaionList = ({ pendingFriendsInvitations }) => {
+const PendingInvitaionList: React.FC = ({ pendingFriendsInvitations }) => {
   return (
     <MainContainer>
       {pendingFriendsInvitations.map((invitaion) => (

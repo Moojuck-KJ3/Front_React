@@ -65,6 +65,10 @@ export const connectWithSocketServer = (userDetails) => {
     webRTCHandler.handleSignalingData(data);
   });
 
+  socket.on('say-hi', (message) => {
+    console.log(message);
+  });
+
   socket.on('room-participant-left', (data) => {
     console.log('user left room');
     webRTCHandler.handleParticipantLeftRoom(data);
@@ -94,4 +98,10 @@ export const leaveRoom = (data) => {
 
 export const signalPeerData = (data) => {
   socket.emit('conn-signal', data);
+};
+
+export const sayHi = (data) => {
+  console.log(data);
+
+  socket.emit('say-hi', data);
 };
