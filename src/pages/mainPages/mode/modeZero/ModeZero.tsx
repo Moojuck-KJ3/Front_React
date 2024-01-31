@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ExpainingModal from './modal/ModeZeroExpainingModal';
 import FoodTags from './foodTag/FoodTags';
 import VideoContainer from '../../room/video/VideoContainer';
 import ModeZeroSideBar from './sideBar/ModeZeroSideBar';
 import SelectDoneModal from '../../../../shared/modal/SelectDoneModal';
 import { connect } from 'react-redux';
-import { getActions } from '../../../../store/actions/roomActions';
+import { getActions } from '../../../../store/actions/modeZeroAction';
+import { FoodCategorys } from './foodLists';
 
 const ModeZero: React.FC = ({
   shouldAnimate,
@@ -15,11 +16,16 @@ const ModeZero: React.FC = ({
   isSelectDone,
   handleSelectionDone,
   setIsSelectDone,
+  setFoodTagLists,
 }) => {
   const [selectedFoodTags, setSelectedFoodTags] = useState([]);
   const addFoodTagToSidebar = (tag) => {
     setSelectedFoodTags((prevTags) => [...prevTags, tag]);
   };
+
+  useEffect(() => {
+    setFoodTagLists(FoodCategorys);
+  });
 
   return (
     <div className="absolute w-full h-full top-0 left-0 flex bg-[#20B4C8]">
@@ -48,9 +54,9 @@ const ModeZero: React.FC = ({
   );
 };
 
-const mapStoreStateToProps = ({ room }) => {
+const mapStoreStateToProps = ({ modeOne }) => {
   return {
-    ...room,
+    ...modeOne,
   };
 };
 
