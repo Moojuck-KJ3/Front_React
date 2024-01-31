@@ -25,6 +25,8 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ register }) => {
       email,
       password,
     };
+
+    
     register(userDetails, navigate);
   };
 

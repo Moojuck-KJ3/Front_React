@@ -24,6 +24,8 @@ const login = (userDetails, navigate) => {
   return async (dispatch) => {
     const response = await api.login(userDetails);
     console.log(response);
+
+    console.log(response);
     if (response.error) {
       dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
@@ -37,6 +39,8 @@ const login = (userDetails, navigate) => {
 };
 
 const register = (userDetails, navigate) => {
+  console.log(userDetails);
+  
   return async (dispatch) => {
     const response = await api.register(userDetails);
     console.log(response);
