@@ -13,6 +13,7 @@ const initState = {
   isUserJoinedWithOnlyAudio: false,
   isInitRoom: false,
   roomMode: 'MODE_NUMBER_ZERO',
+  roomId:null,
 };
 
 const reducer = (state = initState, action) => {
@@ -70,6 +71,11 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         roomMode: action.roomMode,
+      };
+    case roomActions.SET_ROOM_ID:
+      return {
+        ...state,
+        roomId: action.roomId,
       };
     default:
       return state;
