@@ -14,6 +14,7 @@ export const roomActions = {
   SET_IS_INIT_ROOM: 'SET_IS_INIT_ROOM',
   SET_ROOM_MODE: 'ROOM.SET_ROOM_MODE',
   SET_ROOM_ID: 'ROOM.SET_ROOM_ID',
+  SET_DECISE_RESTAURANT_ID: 'ROOM.SET_DECISE_RESTAURANT_ID',
 };
 
 export const setOpenRoom = (isUserRoomCreator = false, isUserInRoom = false) => {
@@ -37,6 +38,7 @@ export const getActions = (dispatch) => {
       dispatch(setRoomMode(roomMode));
     },
     setRoomId: (roomId) => dispatch(setRoomId(roomId)),
+    setDeciseRestaurantId: (restaurantId) => dispatch(setDeciseRestaurantId(restaurantId)),
   };
 };
 
@@ -112,5 +114,12 @@ export const setRoomId = (roomId) => {
   return {
     type: roomActions.SET_ROOM_ID,
     roomId,
+  };
+};
+
+export const setDeciseRestaurantId = (restaurantId) => {
+  return {
+    type: roomActions.SET_DECISE_RESTAURANT_ID,
+    restaurantId,
   };
 };

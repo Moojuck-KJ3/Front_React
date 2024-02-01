@@ -14,6 +14,7 @@ const initState = {
   isInitRoom: false,
   roomMode: 'MODE_NUMBER_ZERO',
   roomId:null,
+  deciseRestsId:null, // 의사결정 시, 현재 보고 있는 restaurnat id
 };
 
 const reducer = (state = initState, action) => {
@@ -76,6 +77,11 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         roomId: action.roomId,
+      };
+    case roomActions.SET_DECISION_RESTAURANT_ID:
+      return {
+        ...state,
+        deciseRestsId: action.deciseRestsId,
       };
     default:
       return state;
