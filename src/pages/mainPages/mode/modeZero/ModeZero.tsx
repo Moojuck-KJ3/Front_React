@@ -7,6 +7,10 @@ import SelectDoneModal from '../../../../shared/modal/SelectDoneModal';
 import { connect } from 'react-redux';
 import { getActions } from '../../../../store/actions/roomActions';
 
+import * as apiType from '../../../../shared/utils/apiInterface';
+import {sendFoodCategoryButton} from '../../../../api';
+import { useSelector } from 'react-redux';
+
 const ModeZero: React.FC = ({
   shouldAnimate,
   isExpaining,
@@ -17,8 +21,35 @@ const ModeZero: React.FC = ({
   setIsSelectDone,
 }) => {
   const [selectedFoodTags, setSelectedFoodTags] = useState([]);
+
+  const roomId :string = useSelector((state) => state.room.roomId);
+
   const addFoodTagToSidebar = (tag) => {
-    setSelectedFoodTags((prevTags) => [...prevTags, tag]);
+    const data: apiType.sendFoodCategoryButtonRequest = {
+      categoryId: tag.id,
+      isDelete: false,
+    };
+
+    const result = sendFoodCategoryButton(roomId, data);
+
+    if (!result.error) {
+      setSelectedFoodTags((prevTags) => [...prevTags, tag]);
+    }
+  };
+
+  const removeFoodTagFromList = (tagsToRemove) => {
+    console.log(selectedFoodTags);
+
+    const data: apiType.sendFoodCategoryButtonRequest = {
+      categoryId: tagsToRemove.id,
+      isDelete: true,
+    };
+
+    const result = sendFoodCategoryButton(roomId, data);
+
+    if (!result.error) {
+      setSelectedFoodTags((prevTags) => prevTags.filter((tag) => tag.id !== tagsToRemove.id));
+    }
   };
 
   return (
@@ -35,7 +66,7 @@ const ModeZero: React.FC = ({
         </div>
         <VideoContainer ModeState={'MODE0'} />
       </div>
-      <ModeZeroSideBar onOpenModal={handleOpenModal} selectedFoodTags={selectedFoodTags} />
+      <ModeZeroSideBar onOpenModal={handleOpenModal} selectedFoodTags={selectedFoodTags} onDelete = {removeFoodTagFromList} />
       {isSelectDone && (
         <SelectDoneModal
           onYes={handleSelectionDone}

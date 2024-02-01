@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import * as apiType from '../../../../../shared/utils/apiInterface';
+import {sendFoodCategoryButton} from '../../../../../api';
+import { useSelector } from 'react-redux';
 
 const FoodCategorys = [
   {
@@ -64,6 +67,8 @@ const FoodTags: React.FC = ({ addFoodTagToSidebar }) => {
   const [categorys, setCategorys] = useState(FoodCategorys);
   const [isClicked, setIsClicked] = useState(null);
 
+  const roomId :string = useSelector((state) => state.room.roomId);
+
   const handleHover = (id) => {
     setCategorys((prevTags) =>
       prevTags.map((tag) => (tag.id === id ? { ...tag, isHovered: true } : { ...tag, isHovered: false })),
@@ -77,13 +82,27 @@ const FoodTags: React.FC = ({ addFoodTagToSidebar }) => {
   const handleRemoveTag = (removedTag) => {
     playSound('shot.mp3');
     setIsClicked(removedTag.id);
-    setTimeout(() => {
-      setCategorys((prevCategorys) => prevCategorys.filter((tag) => tag.id !== removedTag.id));
-      setIsClicked(null);
-      console.log(removedTag);
 
-      addFoodTagToSidebar(removedTag);
-    }, 1000);
+    const data: apiType.sendFoodCategoryButtonRequest = {
+      categoryId: removedTag.id,
+      isDelete: false,
+    };
+
+    // response가 비어있을 것이므로
+    // await를 사용하지 않음
+    // button 눌러서 음식 카테고리를 list에 추가하였으므로 API 쏴준다
+    const response = sendFoodCategoryButton(roomId, data);
+
+    if(!response.error)
+    {
+      setTimeout(() => {
+        setCategorys((prevCategorys) => prevCategorys.filter((tag) => tag.id !== removedTag.id));
+        setIsClicked(null);
+        console.log(removedTag);
+  
+        addFoodTagToSidebar(removedTag);
+      }, 1000);
+    }
   };
 
   const playSound = (soundFileName) => {
