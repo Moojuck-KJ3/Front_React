@@ -6,6 +6,10 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import HelpIcon from '@mui/icons-material/Help';
 import LoopIcon from '@mui/icons-material/Loop';
 
+import * as apiType from '../../../../../shared/utils/apiInterface';
+import {postKeywordsToRests} from '../../../../../api';
+import { useSelector } from 'react-redux';
+
 const DUMMY_RESULT_PLACE = [
   {
     id: 'item1',
@@ -52,13 +56,15 @@ const DUMMY_PLACE = [
   },
 ];
 
-const PlaceCombineArea: React.FC = () => {
+const PlaceCombineArea: React.FC = (restaurantsData = null) => {
   const [openModal, setOpenModal] = useState(false);
   const [draggedTagA, setDraggedTagA] = useState(null);
   const [draggedTagB, setDraggedTagB] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [isSpining, setIsSpining] = useState(false);
+
+  const roomId :string = useSelector((state) => state.room.roomId);
 
   useEffect(() => {
     if (draggedTagA && draggedTagB) {
@@ -93,13 +99,24 @@ const PlaceCombineArea: React.FC = () => {
     const item = DUMMY_PLACE.find((x) => x.id === id);
     console.log(item);
 
-    if (item) {
-      if (targetList === 'A') {
-        setDraggedTagA(item);
-      } else if (targetList === 'B') {
-        setDraggedTagB(item);
+    const data :apiType.postKeywordToRestsRequest = {
+      restId: item.id,
+      slotIndex: (targetList === 'A') ? 0 : 1,
+    };
+
+    const response = postKeywordsToRests(roomId, data);
+
+    if(!response.error)
+    {
+      if (item) {
+        if (targetList === 'A') {
+          setDraggedTagA(item);
+        } else if (targetList === 'B') {
+          setDraggedTagB(item);
+        }
       }
     }
+    
 
     setIsDragging(false);
   };
