@@ -54,7 +54,7 @@ const tagNames = [
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 const getRandomColor = () => `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`;
 
-const RandomPlaceTagList: React.FC = ({ addTagToSideBar }) => {
+const RandomPlaceTagList: React.FC = ({ addTagToSideBar, dataTags = null }) => {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
